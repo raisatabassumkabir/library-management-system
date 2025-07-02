@@ -24,4 +24,6 @@ public class RegistrationService {
         return registrationRepository.findAll();
     }
 
+
+
 }
