@@ -25,7 +25,7 @@ public class WebController {
     }
 
 
-
+//65789o0789878
     @GetMapping("/registration")
     public String registrationPage(Model model){
         model.addAttribute("registration", new Registration());
