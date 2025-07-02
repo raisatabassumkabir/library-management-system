@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @SpringBootApplication
+
 public class AdminController {
-
-
     @Autowired
     private final AdminService adminService;
     private final ManageBookRepository manageBookRepository;
