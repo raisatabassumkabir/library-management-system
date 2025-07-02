@@ -24,15 +24,13 @@ public class WebController {
         return "admin";
     }
 
-
-//65789o0789878
     @GetMapping("/registration")
     public String registrationPage(Model model){
         model.addAttribute("registration", new Registration());
         return "registration";
     }
 
-
+//56568798098-0
 
 
 }
