@@ -30,8 +30,8 @@ public class StudentService {
         if (registrationOptional.isPresent()) {
             Registration registration = registrationOptional.get();
             if (registration.getEmail().equalsIgnoreCase(email.trim())
-                && registration.getPassword().equals(password)
-                && registration.getUserType().equalsIgnoreCase("student")) {
+                    && registration.getPassword().equals(password)
+                    && registration.getUserType().equalsIgnoreCase("student")) {
                 return true;
             }
         }

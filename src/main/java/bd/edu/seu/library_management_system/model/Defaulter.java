@@ -32,8 +32,6 @@ public class Defaulter {
     }
 
 
-
-
     public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }

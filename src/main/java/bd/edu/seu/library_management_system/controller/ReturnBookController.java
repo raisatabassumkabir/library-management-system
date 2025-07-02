@@ -31,7 +31,6 @@ public class ReturnBookController {
         return "returnBook";
     }
 
-
     @PostMapping("/admin/return-book")
         public String returnBookPage(@RequestParam int isbn,@RequestParam String email,@ModelAttribute ReturnBook returnBook, Model model) {
         LocalDate returnDate = LocalDate.now(); //// capture today's date
