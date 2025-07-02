@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Borrowed Books</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .header {
+            background-color: #2c7ad6;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #333;
+            margin: 30px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #2c7ad6;
+        }
+
+        table {
+            width: 100%;
+            background-color: white;
+            border-collapse: collapse;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2c7ad6;
+            color: white;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f9ff;
+        }
+
+        .no-books {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 18px;
+            color: #555;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .overdue {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .fine {
+            background-color: #fff8e6;
+            color: #e67e22;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-active {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-overdue {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    My Borrowed Books
+</div>
+
+<div class="content">
+    <!-- Current Borrowed Books Section -->
+    <h2 class="section-title">Currently Borrowed Books</h2>
+
+    <div th:if="${#lists.isEmpty(borrowedBooks)}" class="no-books">
+        <i class="fas fa-book-open" style="font-size: 24px; margin-bottom: 10px;"></i><br>
+        You have not borrowed any books currently.
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Issue Date</th>
+            <th>Return Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${borrowedBooks}">
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.issueDate}"></td>
+            <td th:text="${book.returnDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+</html>
