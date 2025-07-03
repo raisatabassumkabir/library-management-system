@@ -19,12 +19,10 @@ public class ReturnBookController {
     private final IssuedBookService issuedBookService;
     private final ReturnBookService returnBookService;
 
-
     public ReturnBookController(IssuedBookService issuedBookService, ReturnBookService returnBookService) {
         this.issuedBookService = issuedBookService;
         this.returnBookService = returnBookService;
     }
-
     @GetMapping("/returnBook")
     public String ReturnBookPage(Model model) {
         model.addAttribute("returnBookList", returnBookService.getAllReturnBook());
