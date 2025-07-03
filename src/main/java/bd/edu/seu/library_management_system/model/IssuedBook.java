@@ -26,7 +26,6 @@ public class IssuedBook {
     }
     public IssuedBook() {
 
-
     }
     public String getEmail() {
         return email;

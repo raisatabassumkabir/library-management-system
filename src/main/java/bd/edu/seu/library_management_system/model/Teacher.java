@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Teacher {
-
     @Id
     private String email;
     private String Password;

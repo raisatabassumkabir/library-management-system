@@ -20,7 +20,6 @@ public class IssuedBookController {
         this.issuedBookService = issuedBookService;
 
     }
-
     @GetMapping("/issuedBook")
     public String issuedBookPage(Model model) {
         model.addAttribute("issuedBook", new IssuedBook());

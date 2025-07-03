@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface ReturnBookRepository extends JpaRepository<ReturnBook, String> {
 
 
-
 }

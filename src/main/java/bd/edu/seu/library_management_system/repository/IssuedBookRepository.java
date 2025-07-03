@@ -12,5 +12,4 @@ public interface IssuedBookRepository extends JpaRepository<IssuedBook, String> 
     Optional<IssuedBook> findByIsbnAndEmail(int isbn, String email);
     List<IssuedBook> findByEmail(String email);
 
-
 }

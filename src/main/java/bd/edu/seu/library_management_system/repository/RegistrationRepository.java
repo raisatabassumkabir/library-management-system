@@ -10,7 +10,6 @@ import java.util.Optional;
 public interface RegistrationRepository extends JpaRepository<Registration,String> {
 
 
-
     Optional<Registration> findByEmailAndPassword(String email, String password);
     Optional<Registration> findByEmail(String email);
 }

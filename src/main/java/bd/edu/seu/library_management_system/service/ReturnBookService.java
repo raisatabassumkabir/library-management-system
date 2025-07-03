@@ -26,7 +26,6 @@ public class ReturnBookService {
         this.issuedBookRepository = issuedBookRepository;
     }
 
-
     public void saveReturnBook(ReturnBook returnBook) {
         returnBookRepository.save(returnBook);
     }

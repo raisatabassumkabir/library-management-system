@@ -19,7 +19,6 @@ public class ManageBookController {
         this.manageBookService = manageBookService;
     }
 
-
     @GetMapping("/manageBook")
     public String manageBookPage(Model model){
         model.addAttribute("manageBook", new ManageBook());

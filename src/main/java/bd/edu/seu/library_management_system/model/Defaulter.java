@@ -26,7 +26,6 @@ public class Defaulter {
     public Defaulter() {
 
     }
-
     public LocalDate getIssueDate() {
         return issueDate;
     }

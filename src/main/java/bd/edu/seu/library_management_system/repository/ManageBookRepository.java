@@ -14,7 +14,6 @@ public interface ManageBookRepository extends JpaRepository<ManageBook,Integer> 
     Optional<ManageBook> findByIsbn(int isbn);
 
 
-
     @Query("SELECT SUM(m.quantity) FROM ManageBook m")
     long sumQuantities();
 

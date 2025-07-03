@@ -25,7 +25,6 @@
         <h2 class="form-title">RETURN BOOKS</h2>
         <form th:action="@{/admin/return-book}" method="post" th:object="${issuedBook}">
 
-
             E-mail <br> <input type="email" name="email" class="t" required /><br>
             ISBN <br> <input type="number" name="isbn" class="t" required /><br>
             Return Date <br><input type="date" name="returnDate" class="t" required /><br>

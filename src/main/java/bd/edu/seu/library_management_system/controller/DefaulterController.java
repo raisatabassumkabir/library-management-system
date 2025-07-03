@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @SpringBootApplication
-
 public class DefaulterController {
 
     private final IssuedBookService issuedBookService;

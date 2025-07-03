@@ -39,7 +39,6 @@ public class ReturnBookController {
         model.addAttribute("returnBook",new ReturnBook());
         model.addAttribute("returnBookList",returnBookService.getAllReturnBook());
 
-
         return "redirect:/returnBook";
     }
 }

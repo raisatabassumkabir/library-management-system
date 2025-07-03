@@ -54,7 +54,6 @@ public class StudentController
 
         System.out.println("Borrowed books for " + email + ": " + borrowedBooks);
 
-
         if (studentOptional.isPresent()) {
             model.addAttribute("student", studentOptional.get());
             model.addAttribute("borrowedBooks", borrowedBooks);
