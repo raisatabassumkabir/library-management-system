@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @SpringBootApplication
+
 public class WebController {
     @GetMapping("/home")
     public String homePage(){

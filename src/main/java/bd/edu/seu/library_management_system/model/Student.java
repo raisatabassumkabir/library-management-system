@@ -18,7 +18,6 @@ public class Student {
     public Student() {
 
     }
-
     public String getEmail() {
         return email;
     }

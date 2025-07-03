@@ -23,5 +23,4 @@ public class RegistrationService {
     public List<Registration> getAllRegistrations() {
         return registrationRepository.findAll();
     }
-
 }

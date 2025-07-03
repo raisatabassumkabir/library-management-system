@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Registration {
+
   //private String userName;
   @Id
   private String email;

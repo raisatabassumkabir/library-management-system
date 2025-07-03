@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @SpringBootApplication
 public class ViewMembers {
 
-
     private final RegistrationService registrationService;
 
     public ViewMembers(RegistrationService registrationService) {

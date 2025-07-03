@@ -26,7 +26,6 @@ public class IssuedBookService {
         this.manageBookRepository = manageBookRepository;
         this.registrationRepository = registrationRepository;
     }
-
     public String saveIssuedBook(IssuedBook issuedBook) {
        //check registration
         Optional<Registration> registeredUser = registrationRepository.findByEmail(issuedBook.getEmail());

@@ -22,7 +22,6 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-
     public boolean studentLoginAuthentication(String email, String password) {
         Optional<Registration> registrationOptional = registrationRepository.findByEmail(email);
 

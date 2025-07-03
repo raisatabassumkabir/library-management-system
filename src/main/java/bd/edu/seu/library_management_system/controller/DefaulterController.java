@@ -23,5 +23,4 @@ public class DefaulterController {
         return "defaulterList";
     }
 
-
 }

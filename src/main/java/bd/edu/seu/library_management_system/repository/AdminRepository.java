@@ -8,5 +8,6 @@ import java.util.Optional;
 @Repository
 
 public interface AdminRepository extends JpaRepository<Admin, String> {
+
     Optional<Admin>findAdminByEmailAndPassword(String email, String password);
 }

@@ -14,7 +14,6 @@ public class ManageBookService {
     public ManageBookService(ManageBookRepository manageBookRepository) {
         this.manageBookRepository = manageBookRepository;
     }
-
     public void manageBook(ManageBook manageBook) {
         manageBookRepository.save(manageBook);
     }
