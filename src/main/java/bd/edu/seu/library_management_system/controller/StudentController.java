@@ -46,6 +46,7 @@ public class StudentController
             return "index";
         }
     }
+
     @GetMapping("/studentDashboard")
     public String studentDashboardPage(@RequestParam String email, Model model) {
         Optional<Student> studentOptional = studentRepository.findByEmail(email);

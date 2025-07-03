@@ -11,6 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface DefaulterRepository extends JpaRepository<Defaulter, String> {
-
     long count();
 }

@@ -8,10 +8,8 @@ import java.time.LocalDate;
 public class IssuedBook {
     @Id
     private String email;
-
     private int isbn;
     private String title;
-
     private LocalDate issueDate;
     private LocalDate returnDate;
 

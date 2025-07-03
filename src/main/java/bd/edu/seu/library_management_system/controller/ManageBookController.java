@@ -34,6 +34,7 @@ public class ManageBookController {
 
         return "manageBook";
     }
+
     // Load book data into form
     @GetMapping("/admin/edit-book/{isbn}")
      public String editBook(@PathVariable int isbn, Model model) {

@@ -49,6 +49,7 @@ public class AdminController {
         return "admin";
    }
 
+
     @GetMapping("/adminDashboard")
     public String showDashboard(Model model) {
         long totalBooks = manageBookRepository.sumQuantities();

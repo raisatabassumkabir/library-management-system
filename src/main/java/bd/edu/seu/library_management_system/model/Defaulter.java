@@ -29,7 +29,6 @@ public class Defaulter {
         return issueDate;
     }
 
-
     public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }

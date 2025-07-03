@@ -16,5 +16,4 @@ public class TeacherService {
     public void saveTeacher(Teacher teacher) {
         teacherRepository.save(teacher);
     }
-
 }
