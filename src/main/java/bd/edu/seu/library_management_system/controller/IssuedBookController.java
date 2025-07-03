@@ -15,7 +15,6 @@ public class IssuedBookController {
 
     private final IssuedBookService issuedBookService;
 
-
     public IssuedBookController(IssuedBookService issuedBookService) {
         this.issuedBookService = issuedBookService;
 

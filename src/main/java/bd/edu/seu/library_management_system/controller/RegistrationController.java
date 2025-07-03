@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @SpringBootApplication
 public class RegistrationController {
 
-
     private final RegistrationService registrationService;
 
 

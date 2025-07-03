@@ -19,6 +19,7 @@ public class Student {
 
     }
 
+
     public String getEmail() {
         return email;
     }

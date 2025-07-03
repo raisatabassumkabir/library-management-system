@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class ManageBook {
+
     @Id
     private int isbn;
     private String title;

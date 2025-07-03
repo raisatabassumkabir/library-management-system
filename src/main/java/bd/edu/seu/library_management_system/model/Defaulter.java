@@ -22,7 +22,6 @@ public class Defaulter {
         this.returnDate = returnDate;
         this.title = title;
     }
-
     public Defaulter() {
 
     }

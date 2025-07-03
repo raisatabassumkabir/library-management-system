@@ -23,6 +23,7 @@ public class AdminController {
     private final ManageBookRepository manageBookRepository;
     private final IssuedBookRepository issuedBookRepository;
     private final RegistrationRepository registrationRepository;
+
     @Autowired
     private IssuedBookService issuedBookService;
 
