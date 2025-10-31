@@ -31,8 +31,7 @@ public class DefaulterController {
 
     @PostMapping("/admin/clearDefaulter")
     public String clearDefaulter(Model model) {
-        model.addAttribute("defaulters",defaulterService
-                .findDefaulters());
+        model.addAttribute("defaulters",defaulterService.findDefaulters());
         return "defaulterList";
     }
 
