@@ -1,5 +1,6 @@
 package bd.edu.seu.library_management_system.controller;
 
+import bd.edu.seu.library_management_system.service.DefaulterService;
 import bd.edu.seu.library_management_system.service.IssuedBookService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -12,14 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DefaulterController {
 
     private final IssuedBookService issuedBookService;
+    private final DefaulterService defaulterService;
 
-    public DefaulterController(IssuedBookService issuedBookService) {
+    public DefaulterController(IssuedBookService issuedBookService, DefaulterService defaulterService) {
         this.issuedBookService = issuedBookService;
+        this.defaulterService = defaulterService;
     }
 
     @GetMapping("/defaulterList")
     public String defaulterListPage(Model model) {
-        model.addAttribute("defaulters", issuedBookService.findDefaulters());
+        model.addAttribute("defaulters", defaulterService.findDefaulters());
         return "defaulterList";
     }
 
