@@ -3,6 +3,7 @@ import bd.edu.seu.library_management_system.repository.IssuedBookRepository;
 import bd.edu.seu.library_management_system.repository.ManageBookRepository;
 import bd.edu.seu.library_management_system.repository.RegistrationRepository;
 import bd.edu.seu.library_management_system.service.AdminService;
+import bd.edu.seu.library_management_system.service.DefaulterService;
 import bd.edu.seu.library_management_system.service.IssuedBookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class AdminController {
 
     @Autowired
     private IssuedBookService issuedBookService;
+    private DefaulterService defaulterService;
 
 
     public AdminController(AdminService adminService, ManageBookRepository manageBookRepository, IssuedBookRepository issuedBookRepository, RegistrationRepository registrationRepository) {
@@ -54,7 +56,7 @@ public class AdminController {
         long totalBooks = manageBookRepository.sumQuantities();
         long totalIssuedBooks = issuedBookRepository.count();
         long totalUser = registrationRepository.count();
-        long totalDefaulters = issuedBookService.findDefaulters().size();
+        long totalDefaulters = defaulterService.findDefaulters().size();
 
         System.out.println("Total Books Count: " + totalBooks);
         System.out.println("Total Issued Books Count: " + totalIssuedBooks);
