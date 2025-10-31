@@ -6,11 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@SpringBootApplication
+
 public class DefaulterController {
 
     private final DefaulterService defaulterService;
@@ -27,7 +29,8 @@ public class DefaulterController {
     }
 
     @PostMapping("/admin/clearDefaulter")
-    public String clearDefaulter(Model model) {
+    public String clearDefaulter(@RequestParam String email, Model model) {
+        defaulterService.clearDefaulter(email);
         model.addAttribute("defaulters",defaulterService.findDefaulters());
         return "defaulterList";
     }
