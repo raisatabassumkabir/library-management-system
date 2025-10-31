@@ -2,8 +2,11 @@ package bd.edu.seu.library_management_system.service;
 
 import bd.edu.seu.library_management_system.model.Defaulter;
 import bd.edu.seu.library_management_system.model.IssuedBook;
+import bd.edu.seu.library_management_system.repository.DefaulterRepository;
 import bd.edu.seu.library_management_system.repository.IssuedBookRepository;
+import bd.edu.seu.library_management_system.repository.ManageBookRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -14,9 +17,13 @@ import java.util.List;
 public class DefaulterService {
 
     private final IssuedBookRepository issuedBookRepository;
+    private final DefaulterRepository defaulterRepository;
 
-    public DefaulterService(IssuedBookRepository issuedBookRepository) {
+
+    public DefaulterService(IssuedBookRepository issuedBookRepository, DefaulterRepository defaulterRepository) {
         this.issuedBookRepository = issuedBookRepository;
+
+        this.defaulterRepository = defaulterRepository;
     }
 
     public List<Defaulter> findDefaulters() {
@@ -41,10 +48,11 @@ public class DefaulterService {
             }
         }
 
-        return defaulters;
+        return defaulterRepository.findAll();
     }
-    public void clearDefaulter(Defaulter defaulter) {
-
+    @Transactional
+    public void clearDefaulter(String email) {
+      defaulterRepository.deleteById(email);
     }
 
 }
