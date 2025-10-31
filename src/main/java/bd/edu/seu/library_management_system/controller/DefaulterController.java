@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @SpringBootApplication
 public class DefaulterController {
 
-    private final IssuedBookService issuedBookService;
     private final DefaulterService defaulterService;
 
 
-    public DefaulterController(IssuedBookService issuedBookService, DefaulterService defaulterService) {
-        this.issuedBookService = issuedBookService;
-
+    public DefaulterController( DefaulterService defaulterService) {
         this.defaulterService = defaulterService;
     }
 
