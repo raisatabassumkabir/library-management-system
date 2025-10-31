@@ -26,8 +26,8 @@ public class AdminController {
     private final RegistrationRepository registrationRepository;
 
     @Autowired
-    private IssuedBookService issuedBookService;
     private DefaulterService defaulterService;
+
 
 
     public AdminController(AdminService adminService, ManageBookRepository manageBookRepository, IssuedBookRepository issuedBookRepository, RegistrationRepository registrationRepository) {
@@ -61,6 +61,7 @@ public class AdminController {
         System.out.println("Total Books Count: " + totalBooks);
         System.out.println("Total Issued Books Count: " + totalIssuedBooks);
         System.out.println("Total Users Count: " + totalUser);
+        System.out.println("Total Defaulters Count: " + totalDefaulters);
 
         model.addAttribute("totalBookCount", totalBooks);
         model.addAttribute("totalIssuedBooks", totalIssuedBooks);

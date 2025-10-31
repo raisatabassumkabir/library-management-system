@@ -1,7 +1,5 @@
 package bd.edu.seu.library_management_system.service;
 
-
-
 import bd.edu.seu.library_management_system.model.Defaulter;
 import bd.edu.seu.library_management_system.model.IssuedBook;
 import bd.edu.seu.library_management_system.repository.IssuedBookRepository;
@@ -12,22 +10,25 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
 public class DefaulterService {
+
     private final IssuedBookRepository issuedBookRepository;
 
     public DefaulterService(IssuedBookRepository issuedBookRepository) {
         this.issuedBookRepository = issuedBookRepository;
     }
-        public List<Defaulter> findDefaulters() {
+
+    public List<Defaulter> findDefaulters() {
         List<IssuedBook> allIssuedBooks = issuedBookRepository.findAll();
         List<Defaulter> defaulters = new ArrayList<>();
         LocalDate today = LocalDate.now();
+
         for (IssuedBook book : allIssuedBooks) {
             if (book.getReturnDate() != null && book.getReturnDate().isBefore(today)) {
                 long daysLate = ChronoUnit.DAYS.between(book.getReturnDate(), today);
                 long fine = daysLate * 10;
+
                 Defaulter defaulter = new Defaulter(
                         book.getIssueDate(),
                         book.getEmail(),
@@ -39,6 +40,7 @@ public class DefaulterService {
                 defaulters.add(defaulter);
             }
         }
+
         return defaulters;
     }
 
