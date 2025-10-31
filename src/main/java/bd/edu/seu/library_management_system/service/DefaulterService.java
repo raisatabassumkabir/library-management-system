@@ -43,6 +43,9 @@ public class DefaulterService {
 
         return defaulters;
     }
+    public void clearDefaulter(Defaulter defaulter) {
+
+    }
 
 }
 
