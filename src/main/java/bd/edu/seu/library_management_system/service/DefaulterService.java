@@ -1,10 +1,8 @@
 package bd.edu.seu.library_management_system.service;
-
 import bd.edu.seu.library_management_system.model.Defaulter;
 import bd.edu.seu.library_management_system.model.IssuedBook;
 import bd.edu.seu.library_management_system.repository.DefaulterRepository;
 import bd.edu.seu.library_management_system.repository.IssuedBookRepository;
-import bd.edu.seu.library_management_system.repository.ManageBookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +48,8 @@ public class DefaulterService {
 
         return defaulterRepository.findAll();
     }
-    @Transactional
+
+    //@Transactional
     public void clearDefaulter(String email) {
       defaulterRepository.deleteById(email);
     }
