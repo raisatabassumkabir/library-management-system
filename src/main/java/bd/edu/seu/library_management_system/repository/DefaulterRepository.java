@@ -13,4 +13,7 @@ import java.util.Optional;
 public interface DefaulterRepository extends JpaRepository<Defaulter, String> {
 
     long count();
+
+
+    void deleteByEmail(String email);
 }

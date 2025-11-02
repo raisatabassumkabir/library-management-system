@@ -21,6 +21,8 @@
 </div>
 
 <div class="content-area">
+
+    <div th:if="${msg}" class="alert-success" th:text="${msg}"></div>
     <div class="book-list">
         <h2 class="form-title">Defaulter List</h2>
         <table class="book-table">

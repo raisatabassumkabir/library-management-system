@@ -23,13 +23,20 @@ public class DefaulterService {
 
         this.defaulterRepository = defaulterRepository;
     }
+public List<Defaulter> findDefaulters() {
+    return defaulterRepository.findAll();
+}
 
-    public List<Defaulter> findDefaulters() {
-        List<IssuedBook> allIssuedBooks = issuedBookRepository.findAll();
-        List<Defaulter> defaulters = new ArrayList<>();
+    // Populate defaulters table (call manually or via scheduler)
+    @Transactional
+    public void updateDefaulters() {
+        defaulterRepository.deleteAll(); // Start fresh
+
+        List<IssuedBook> issuedBooks = issuedBookRepository.findAll();
+        List<Defaulter> newDefaulters = new ArrayList<>();
         LocalDate today = LocalDate.now();
 
-        for (IssuedBook book : allIssuedBooks) {
+        for (IssuedBook book : issuedBooks) {
             if (book.getReturnDate() != null && book.getReturnDate().isBefore(today)) {
                 long daysLate = ChronoUnit.DAYS.between(book.getReturnDate(), today);
                 long fine = daysLate * 10;
@@ -42,16 +49,14 @@ public class DefaulterService {
                         book.getReturnDate(),
                         book.getTitle()
                 );
-                defaulters.add(defaulter);
+                newDefaulters.add(defaulter);
             }
         }
-
-        return defaulterRepository.findAll();
+        defaulterRepository.saveAll(newDefaulters);
     }
-
-    //@Transactional
+    @Transactional
     public void clearDefaulter(String email) {
-      defaulterRepository.deleteById(email);
+      defaulterRepository.deleteByEmail(email);
     }
 
 }
