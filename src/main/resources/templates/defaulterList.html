@@ -29,6 +29,7 @@
             <thead>
             <tr>
                 <th>Email</th>
+                <th>Defaulter ID</th>
                 <th>ISBN</th>
                 <th>Book Title</th>
                 <th>Issue Date</th>
@@ -40,6 +41,7 @@
             <tbody>
             <tr th:each="defaulter : ${defaulters}">
                 <td th:text="${defaulter.email}"></td>
+                <td th:text="${defaulter.defaulterId}"></td>
                 <td th:text="${defaulter.isbn}"></td>
                 <td th:text="${defaulter.title}"></td>
                 <td th:text="${defaulter.issueDate}"></td>
@@ -48,7 +50,7 @@
 
                 <td>
                     <form th:action="@{/admin/clearDefaulter}" method="post" style="display:inline;">
-                        <input type="hidden" name="email" th:value="${defaulter.email}">
+                        <input type="hidden" name="defaulterId" th:value="${defaulter.defaulterId}">
                         <button type="submit" class="btn btn-danger">
                             <i class="fa fa-check"></i> Clear
                         </button>

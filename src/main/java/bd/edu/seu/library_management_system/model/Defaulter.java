@@ -1,18 +1,23 @@
 package bd.edu.seu.library_management_system.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 @Entity
 public class Defaulter {
-    @Id
     private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "defaulter_id")
+    private Long defaulterId;  // Unique ID
     private int isbn;
     private String title;
     private LocalDate issueDate;
     private LocalDate returnDate;
     private Long fineAmount;
+
+    // Constructors
+    public Defaulter() {}
 
     public Defaulter(LocalDate issueDate, String email, Long fineAmount, int isbn, LocalDate returnDate, String title) {
         this.issueDate = issueDate;
@@ -21,56 +26,28 @@ public class Defaulter {
         this.isbn = isbn;
         this.returnDate = returnDate;
         this.title = title;
-    }
-    public Defaulter() {
 
     }
 
-    public LocalDate getIssueDate() {
-        return issueDate;
-    }
+    // Getters and Setters
+    public Long getDefaulterId() { return defaulterId; }
+    public void setDefaulterId(Long defaulterId) { this.defaulterId = defaulterId; }
 
-    public void setIssueDate(LocalDate issueDate) {
-        this.issueDate = issueDate;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getEmail() {
-        return email;
-    }
+    public int getIsbn() { return isbn; }
+    public void setIsbn(int isbn) { this.isbn = isbn; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public Long getFineAmount() {
-        return fineAmount;
-    }
+    public LocalDate getIssueDate() { return issueDate; }
+    public void setIssueDate(LocalDate issueDate) { this.issueDate = issueDate; }
 
-    public void setFineAmount(Long fineAmount) {
-        this.fineAmount = fineAmount;
-    }
+    public LocalDate getReturnDate() { return returnDate; }
+    public void setReturnDate(LocalDate returnDate) { this.returnDate = returnDate; }
 
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
-    }
-
-    public LocalDate getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public Long getFineAmount() { return fineAmount; }
+    public void setFineAmount(Long fineAmount) { this.fineAmount = fineAmount; }
 }

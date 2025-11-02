@@ -25,17 +25,16 @@ public class DefaulterController {
     }
 
     @GetMapping("/defaulterList")
-    public String defaulterListPage( Model model) {
-        defaulterService.updateDefaulters();
-        model.addAttribute("defaulters",defaulterService.findDefaulters());
+    public String defaulterListPage(Model model) {
+        defaulterService.updateDefaulters(); // Refreshes list
+        model.addAttribute("defaulters", defaulterService.findDefaulters());
         return "defaulterList";
     }
 
     @PostMapping("/admin/clearDefaulter")
-    public String clearDefaulter(@RequestParam String email, RedirectAttributes ra) {
-
-        defaulterService.clearDefaulter(email);
-        ra.addFlashAttribute("msg", "Defaulter cleared and list refreshed!");
+    public String clearDefaulter(@RequestParam Long defaulterId, RedirectAttributes ra) {
+        defaulterService.clearDefaulter(defaulterId);
+        ra.addFlashAttribute("msg", "Defaulter record cleared successfully!");
         return "redirect:/defaulterList";
     }
 
