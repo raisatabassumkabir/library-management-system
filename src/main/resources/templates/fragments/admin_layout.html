@@ -6,38 +6,38 @@
 <body class="bg-gray-100 font-sans flex text-gray-800">
 
     <!-- Sidebar -->
-    <div class="w-64 bg-panel text-gray-400 min-h-screen fixed left-0 top-0 overflow-y-auto z-10 font-sans">
+    <div class="w-64 bg-slate-800 text-gray-400 min-h-screen fixed left-0 top-0 overflow-y-auto z-10 font-sans">
         <div class="py-6 flex flex-col items-center border-b border-slate-700">
             <i class="fa fa-book-open text-3xl text-primary mb-2"></i>
             <h2 class="text-xl font-bold text-white tracking-wide">Admin Panel</h2>
         </div>
         <div class="flex flex-col py-4 px-2 space-y-1">
             <a href="http://localhost:8080/adminDashboard"
-                class="px-4 py-3 hover:bg-panel-hover hover:text-white rounded-lg transition flex items-center gap-3"
-                th:classappend="${currentPage == 'dashboard'} ? 'bg-panel-hover text-white' : ''"><i
+                class="px-4 py-3 hover:bg-slate-700 hover:text-white rounded-lg transition flex items-center gap-3"
+                th:classappend="${currentPage == 'dashboard'} ? 'bg-slate-700 text-white' : ''"><i
                     class="fa fa-home w-5 text-center"></i> Dashboard</a>
             <a href="http://localhost:8080/manageBook"
-                class="px-4 py-3 hover:bg-panel-hover hover:text-white rounded-lg transition flex items-center gap-3"
-                th:classappend="${currentPage == 'manageBook'} ? 'bg-panel-hover text-white' : ''"><i
+                class="px-4 py-3 hover:bg-slate-700 hover:text-white rounded-lg transition flex items-center gap-3"
+                th:classappend="${currentPage == 'manageBook'} ? 'bg-slate-700 text-white' : ''"><i
                     class="fa fa-book w-5 text-center"></i> Manage Book</a>
             <a href="http://localhost:8080/issuedBook "
-                class="px-4 py-3 hover:bg-panel-hover hover:text-white rounded-lg transition flex items-center gap-3"
-                th:classappend="${currentPage == 'issuedBook'} ? 'bg-panel-hover text-white' : ''"><i
+                class="px-4 py-3 hover:bg-slate-700 hover:text-white rounded-lg transition flex items-center gap-3"
+                th:classappend="${currentPage == 'issuedBook'} ? 'bg-slate-700 text-white' : ''"><i
                     class="fa fa-address-book w-5 text-center"></i> Issued Book</a>
             <a href="http://localhost:8080/returnBook"
-                class="px-4 py-3 hover:bg-panel-hover hover:text-white rounded-lg transition flex items-center gap-3"
-                th:classappend="${currentPage == 'returnBook'} ? 'bg-panel-hover text-white' : ''"><i
+                class="px-4 py-3 hover:bg-slate-700 hover:text-white rounded-lg transition flex items-center gap-3"
+                th:classappend="${currentPage == 'returnBook'} ? 'bg-slate-700 text-white' : ''"><i
                     class="fa fa-undo w-5 text-center"></i> Return Book</a>
             <a href="http://localhost:8080/viewMembers"
-                class="px-4 py-3 hover:bg-panel-hover hover:text-white rounded-lg transition flex items-center gap-3"
-                th:classappend="${currentPage == 'viewMembers'} ? 'bg-panel-hover text-white' : ''"><i
+                class="px-4 py-3 hover:bg-slate-700 hover:text-white rounded-lg transition flex items-center gap-3"
+                th:classappend="${currentPage == 'viewMembers'} ? 'bg-slate-700 text-white' : ''"><i
                     class="fa fa-users w-5 text-center"></i> View Members</a>
             <a href="http://localhost:8080/index"
-                class="px-4 py-3 hover:bg-panel-hover hover:text-white rounded-lg transition flex items-center gap-3"><i
+                class="px-4 py-3 hover:bg-slate-700 hover:text-white rounded-lg transition flex items-center gap-3"><i
                     class="fa fa-user-plus w-5 text-center"></i> Add Member</a>
             <a href="http://localhost:8080/defaulterList"
-                class="px-4 py-3 hover:bg-panel-hover hover:text-white rounded-lg transition flex items-center gap-3"
-                th:classappend="${currentPage == 'defaulters'} ? 'bg-panel-hover text-white' : ''"><i
+                class="px-4 py-3 hover:bg-slate-700 hover:text-white rounded-lg transition flex items-center gap-3"
+                th:classappend="${currentPage == 'defaulters'} ? 'bg-slate-700 text-white' : ''"><i
                     class="fa fa-ban w-5 text-center"></i> Defaulters </a>
             <div class="my-4 border-t border-slate-700 mx-4"></div>
             <a href="http://localhost:8080/index"
