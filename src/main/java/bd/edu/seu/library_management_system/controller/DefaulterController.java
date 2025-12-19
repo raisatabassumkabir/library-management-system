@@ -1,5 +1,5 @@
 package bd.edu.seu.library_management_system.controller;
-import bd.edu.seu.library_management_system.repository.DefaulterRepository;
+
 import bd.edu.seu.library_management_system.service.DefaulterService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -9,15 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @SpringBootApplication
 
 public class DefaulterController {
 
     private final DefaulterService defaulterService;
-
-
 
     public DefaulterController(DefaulterService defaulterService) {
         this.defaulterService = defaulterService;
@@ -37,6 +34,5 @@ public class DefaulterController {
         ra.addFlashAttribute("msg", "Defaulter record cleared successfully!");
         return "redirect:/defaulterList";
     }
-
 
 }

@@ -27,7 +27,6 @@ public class AdminController {
     private DefaulterService defaulterService;
 
 
-
     public AdminController(AdminService adminService, ManageBookRepository manageBookRepository, IssuedBookRepository issuedBookRepository, RegistrationRepository registrationRepository) {
         this.adminService = adminService;
         this.manageBookRepository = manageBookRepository;
