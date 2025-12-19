@@ -1,30 +1,36 @@
 package bd.edu.seu.library_management_system.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
+
 @Entity
 public class IssuedBook {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String email;
     private int isbn;
     private String title;
     private LocalDate issueDate;
     private LocalDate returnDate;
 
-
-    public IssuedBook(String email, int isbn, LocalDate issueDate, LocalDate returnDate, String title) {
+    public IssuedBook(long id, String email, int isbn, LocalDate issueDate, LocalDate returnDate, String title) {
         this.email = email;
         this.isbn = isbn;
         this.issueDate = issueDate;
-
+        this.id = id;
         this.returnDate = returnDate;
         this.title = title;
     }
+
     public IssuedBook() {
 
     }
+
     public String getEmail() {
         return email;
     }
@@ -63,5 +69,13 @@ public class IssuedBook {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

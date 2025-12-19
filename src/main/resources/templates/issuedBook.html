@@ -76,6 +76,7 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-800 text-white shadow-md">
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase">ID</th>
                                 <th class="p-4 font-semibold text-sm tracking-wide uppercase">E-mail</th>
                                 <th class="p-4 font-semibold text-sm tracking-wide uppercase">ISBN</th>
                                 <th class="p-4 font-semibold text-sm tracking-wide uppercase">Book Title</th>
@@ -86,6 +87,7 @@
                         </thead>
                         <tbody class="divide-y divide-gray-100 text-slate-600">
                             <tr th:each="book : ${issuedBookList}" class="hover:bg-slate-50 transition">
+                                <td class="p-4 font-medium" th:text="${book.id}"></td>
                                 <td class="p-4 font-medium" th:text="${book.email}"></td>
                                 <td class="p-4 font-mono text-sm" th:text="${book.isbn}"></td>
                                 <td class="p-4 text-slate-800 font-semibold" th:text="${book.title}"></td>
@@ -94,7 +96,7 @@
                             </tr>
                             <!-- Empty State (Optional: if list is empty) -->
                             <tr th:if="${#lists.isEmpty(issuedBookList)}">
-                                <td colspan="5" class="p-8 text-center text-gray-400 italic">No books currently issued.
+                                <td colspan="6" class="p-8 text-center text-gray-400 italic">No books currently issued.
                                 </td>
                             </tr>
                         </tbody>

@@ -1,7 +1,6 @@
 package bd.edu.seu.library_management_system.controller;
 
 import bd.edu.seu.library_management_system.service.DefaulterService;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@SpringBootApplication
-
 public class DefaulterController {
 
     private final DefaulterService defaulterService;

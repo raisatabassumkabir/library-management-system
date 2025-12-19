@@ -1,6 +1,5 @@
 package bd.edu.seu.library_management_system.service;
 
-import bd.edu.seu.library_management_system.model.Defaulter;
 import bd.edu.seu.library_management_system.model.IssuedBook;
 import bd.edu.seu.library_management_system.model.ManageBook;
 import bd.edu.seu.library_management_system.model.Registration;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,20 +19,21 @@ public class IssuedBookService {
     private final ManageBookRepository manageBookRepository;
     private final RegistrationRepository registrationRepository;
 
-    public IssuedBookService(IssuedBookRepository issuedBookRepository, ManageBookRepository manageBookRepository, RegistrationRepository registrationRepository) {
+    public IssuedBookService(IssuedBookRepository issuedBookRepository, ManageBookRepository manageBookRepository,
+            RegistrationRepository registrationRepository) {
         this.issuedBookRepository = issuedBookRepository;
         this.manageBookRepository = manageBookRepository;
         this.registrationRepository = registrationRepository;
     }
+
     public String saveIssuedBook(IssuedBook issuedBook) {
-       //check registration
+        // check registration
         Optional<Registration> registeredUser = registrationRepository.findByEmail(issuedBook.getEmail());
 
         if (registeredUser.isEmpty()) {
             System.out.println("Email not registered: " + issuedBook.getEmail());
             return "Email not registered. Please register first.";
         }
-
 
         Optional<ManageBook> optionalManageBook = manageBookRepository.findByIsbn(issuedBook.getIsbn());
 
@@ -45,14 +44,14 @@ public class IssuedBookService {
                 return "Title do not matches with the ISBN.";
             }
 
-             if (manageBook.getQuantity() <= 0) {
+            if (manageBook.getQuantity() <= 0) {
                 return "Book is currently out of stock.";
             }
 
             issuedBookRepository.save(issuedBook);
             System.out.println("Issued book saved successfully for " + issuedBook.getEmail());
 
-             //Decrease quantity
+            // Decrease quantity
             manageBook.setQuantity(manageBook.getQuantity() - 1);
             manageBookRepository.save(manageBook);
             return "Book issued with the ISBN.";
@@ -62,12 +61,11 @@ public class IssuedBookService {
         }
     }
 
-        public List<IssuedBook> findAllIssuedBook () {
-            return issuedBookRepository.findAll();
-        }
+    public List<IssuedBook> findAllIssuedBook() {
+        return issuedBookRepository.findAll();
+    }
 
-
-    //  Calculate Fine
+    // Calculate Fine
     public long calculateFine(IssuedBook issuedBook) {
         if (issuedBook.getReturnDate() != null) {
             LocalDate today = LocalDate.now();
@@ -78,10 +76,9 @@ public class IssuedBookService {
         }
         return 0;
     }
+
     public List<IssuedBook> findIssuedBooksByEmail(String email) {
         return issuedBookRepository.findByEmail(email);
     }
-
-
 
 }

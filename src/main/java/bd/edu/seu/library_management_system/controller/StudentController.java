@@ -1,4 +1,5 @@
 package bd.edu.seu.library_management_system.controller;
+
 import bd.edu.seu.library_management_system.model.IssuedBook;
 import bd.edu.seu.library_management_system.model.Student;
 import bd.edu.seu.library_management_system.repository.RegistrationRepository;
@@ -6,28 +7,28 @@ import bd.edu.seu.library_management_system.repository.StudentRepository;
 import bd.edu.seu.library_management_system.service.IssuedBookService;
 import bd.edu.seu.library_management_system.service.RegistrationService;
 import bd.edu.seu.library_management_system.service.StudentService;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-
 @Controller
-@SpringBootApplication
-public class StudentController
-{
+public class StudentController {
     private final StudentRepository studentRepository;
     private final RegistrationRepository registrationRepository;
     private final RegistrationService registrationService;
     private final StudentService studentService;
     private final IssuedBookService issuedBookService;
 
-    public StudentController(StudentRepository studentRepository, RegistrationRepository registrationRepository, RegistrationService registrationService, StudentService studentService, IssuedBookService issuedBookService) {
+    public StudentController(StudentRepository studentRepository, RegistrationRepository registrationRepository,
+            RegistrationService registrationService, StudentService studentService,
+            IssuedBookService issuedBookService) {
         this.studentRepository = studentRepository;
         this.registrationRepository = registrationRepository;
         this.registrationService = registrationService;
@@ -39,14 +40,13 @@ public class StudentController
     public String studentLogin(@RequestParam String email, @RequestParam String password, Model model) {
         boolean isValidEmailAndPasswordAndType = studentService.studentLoginAuthentication(email, password);
 
-        if (isValidEmailAndPasswordAndType){
+        if (isValidEmailAndPasswordAndType) {
             return "redirect:/studentDashboard?email=" + email;
-        }else {
+        } else {
             model.addAttribute("error", "Invalid email or password");
             return "index";
         }
     }
-
 
     @GetMapping("/studentDashboard")
     public String studentDashboardPage(@RequestParam String email, Model model) {

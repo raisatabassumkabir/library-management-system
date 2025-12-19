@@ -1,21 +1,18 @@
 package bd.edu.seu.library_management_system.controller;
+
 import bd.edu.seu.library_management_system.repository.IssuedBookRepository;
 import bd.edu.seu.library_management_system.repository.ManageBookRepository;
 import bd.edu.seu.library_management_system.repository.RegistrationRepository;
 import bd.edu.seu.library_management_system.service.AdminService;
 import bd.edu.seu.library_management_system.service.DefaulterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
 @Controller
-@SpringBootApplication
 public class AdminController {
     @Autowired
     private final AdminService adminService;
@@ -26,27 +23,25 @@ public class AdminController {
     @Autowired
     private DefaulterService defaulterService;
 
-
-    public AdminController(AdminService adminService, ManageBookRepository manageBookRepository, IssuedBookRepository issuedBookRepository, RegistrationRepository registrationRepository) {
+    public AdminController(AdminService adminService, ManageBookRepository manageBookRepository,
+            IssuedBookRepository issuedBookRepository, RegistrationRepository registrationRepository) {
         this.adminService = adminService;
         this.manageBookRepository = manageBookRepository;
         this.issuedBookRepository = issuedBookRepository;
         this.registrationRepository = registrationRepository;
     }
 
-
     @PostMapping("/admin-login-form")
-       public String adminAuthentication(@RequestParam String email, @RequestParam String password, Model model){
+    public String adminAuthentication(@RequestParam String email, @RequestParam String password, Model model) {
 
+        boolean isValidEmailAndPassword = adminService.adminAuthenticationByEmailAndPassword(email, password);
+        if (isValidEmailAndPassword) {
+            return "redirect:/adminDashboard";
+        }
 
-       boolean isValidEmailAndPassword=adminService.adminAuthenticationByEmailAndPassword(email, password);
-       if (isValidEmailAndPassword){
-           return "redirect:/adminDashboard";
-       }
-
-        model.addAttribute("error","Invalid email or password");
+        model.addAttribute("error", "Invalid email or password");
         return "admin";
-   }
+    }
 
     @GetMapping("/adminDashboard")
     public String showDashboard(Model model) {
