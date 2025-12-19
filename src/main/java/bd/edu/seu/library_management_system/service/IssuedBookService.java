@@ -44,7 +44,7 @@ public class IssuedBookService {
                 return "Title do not matches with the ISBN.";
             }
 
-            if (manageBook.getQuantity() <= 0) {
+            if (manageBook.getRemainingQuantity() <= 0) {
                 return "Book is currently out of stock.";
             }
 
@@ -52,7 +52,7 @@ public class IssuedBookService {
             System.out.println("Issued book saved successfully for " + issuedBook.getEmail());
 
             // Decrease quantity
-            manageBook.setQuantity(manageBook.getQuantity() - 1);
+            manageBook.setRemainingQuantity(manageBook.getRemainingQuantity() - 1);
             manageBookRepository.save(manageBook);
             return "Book issued with the ISBN.";
 

@@ -1,6 +1,5 @@
 package bd.edu.seu.library_management_system.service;
 
-
 import bd.edu.seu.library_management_system.model.IssuedBook;
 import bd.edu.seu.library_management_system.model.ManageBook;
 import bd.edu.seu.library_management_system.model.ReturnBook;
@@ -20,42 +19,39 @@ public class ReturnBookService {
     private final ManageBookRepository manageBookRepository;
     private final IssuedBookRepository issuedBookRepository;
 
-    public ReturnBookService(ReturnBookRepository returnBookRepository, ManageBookRepository manageBookRepository, IssuedBookRepository issuedBookRepository) {
+    public ReturnBookService(ReturnBookRepository returnBookRepository, ManageBookRepository manageBookRepository,
+            IssuedBookRepository issuedBookRepository) {
         this.returnBookRepository = returnBookRepository;
         this.manageBookRepository = manageBookRepository;
         this.issuedBookRepository = issuedBookRepository;
     }
 
-
     public void saveReturnBook(ReturnBook returnBook) {
         returnBookRepository.save(returnBook);
     }
-    public List<ReturnBook>getAllReturnBook(){
+
+    public List<ReturnBook> getAllReturnBook() {
         return returnBookRepository.findAll();
     }
 
-    public String returnIssuedBook(int isbn, String email, LocalDate returnDate){
+    public String returnIssuedBook(int isbn, String email, LocalDate returnDate) {
 
-        Optional<IssuedBook>optionalIssuedBook=issuedBookRepository.findByIsbnAndEmail(isbn,email);
-        if (optionalIssuedBook.isPresent()){
-            IssuedBook issuedBook=optionalIssuedBook.get();
+        Optional<IssuedBook> optionalIssuedBook = issuedBookRepository.findByIsbnAndEmail(isbn, email);
+        if (optionalIssuedBook.isPresent()) {
+            IssuedBook issuedBook = optionalIssuedBook.get();
             issuedBook.setReturnDate(returnDate);
             issuedBookRepository.delete(issuedBook);
         }
 
-        Optional<ManageBook>optionalManageBook=manageBookRepository.findByIsbn(isbn);
-        if (optionalIssuedBook.isPresent()){
-            ManageBook manageBook=optionalManageBook.get();
-            manageBook.setQuantity(manageBook.getQuantity()+1);
+        Optional<ManageBook> optionalManageBook = manageBookRepository.findByIsbn(isbn);
+        if (optionalIssuedBook.isPresent()) {
+            ManageBook manageBook = optionalManageBook.get();
+            manageBook.setRemainingQuantity(manageBook.getRemainingQuantity() + 1);
             manageBookRepository.save(manageBook);
             return "Book returned successfully!";
-         }   else {
+        } else {
             return "Issued book not found for the given ISBN and email.";
-             }
+        }
     }
 
-
-    }
-
-
-
+}
