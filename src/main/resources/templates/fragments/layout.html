@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8" xmlns:th="https://thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library management system</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+    </style>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
                     colors: {
                         primary: '#2c7ad6',
                         'primary-dark': '#1f5fbf',
@@ -21,8 +28,9 @@
     </script>
 </head>
 
-<body class="bg-gray-100 font-sans">
-    <div class="min-h-screen">
+<body>
+
+    <div th:fragment="header">
         <!-- Top Info Bar -->
         <div
             class="bg-primary h-auto md:h-9 w-full flex flex-col md:flex-row items-center justify-between px-4 md:px-24 py-1 text-white text-sm">
@@ -66,93 +74,15 @@
                                     class="fa fa-user mr-2"></i> Login</a></li>
                     </ul>
                 </div>
-                <!-- Mobile Menu Button (simplified) -->
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden text-2xl text-primary cursor-pointer">
                     <i class="fa fa-bars"></i>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Hero Slider Section -->
-        <div class="relative w-full bg-cover bg-fixed bg-center min-h-[640px] flex items-center justify-center"
-            style="background-image:url('/picture/library.png');">
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
-
-            <div class="container mx-auto px-4 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 w-full">
-
-                <!-- Welcome Text -->
-                <div class="md:col-span-4 text-center md:text-left flex flex-col justify-center text-white">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-2">WELCOME TO LIBRARY<span
-                            class="text-primary">ZONE</span></h1>
-                    <p class="text-xl opacity-90">Knowledge is Power</p>
-                </div>
-
-                <!-- Spacer -->
-                <div class="hidden md:block md:col-span-1"></div>
-
-                <!-- Student Login -->
-                <div class="md:col-span-3">
-                    <div
-                        class="bg-white/80 backdrop-blur-sm rounded-lg p-8 transform transition hover:scale-105 duration-300">
-                        <h1 class="text-2xl font-bold text-center text-primary mb-6">STUDENT</h1>
-                        <form action="/student-login-form" method="post" th:object="${registration}"
-                            class="flex flex-col gap-4">
-                            <div>
-                                <label class="text-primary font-semibold text-sm">E-MAIL</label>
-                                <input type="email" name="email"
-                                    class="w-full h-10 px-3 border-2 border-primary/30 rounded focus:border-primary focus:outline-none shadow-sm transition"
-                                    required />
-                            </div>
-                            <div>
-                                <label class="text-primary font-semibold text-sm">PASSWORD</label>
-                                <input type="password" name="password"
-                                    class="w-full h-10 px-3 border-2 border-primary/30 rounded focus:border-primary focus:outline-none shadow-sm transition"
-                                    required />
-                            </div>
-                            <input type="submit" value="LOGIN"
-                                class="w-full h-10 bg-primary text-white font-bold rounded cursor-pointer hover:bg-primary-dark transition" />
-                            <div class="text-center">
-                                <a href="#" class="text-blue-600 text-sm hover:underline">forget password</a>
-                            </div>
-                            <p th:if="${error}" th:text="${error}" class="text-red-500 text-sm text-center"></p>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Teacher Login -->
-                <div class="md:col-span-3">
-                    <div
-                        class="bg-primary/80 backdrop-blur-sm rounded-lg p-8 transform transition hover:scale-105 duration-300">
-                        <h1 class="text-2xl font-bold text-center text-white mb-6">TEACHER</h1>
-                        <form action="/teacher-login-form" method="post" th:object="${registration}"
-                            class="flex flex-col gap-4 text-white">
-                            <div>
-                                <label class="font-semibold text-sm">E-MAIL</label>
-                                <input type="email" name="email"
-                                    class="w-full h-10 px-3 mt-1 text-black border-2 border-transparent rounded focus:border-white focus:outline-none shadow-sm transition"
-                                    required />
-                            </div>
-                            <div>
-                                <label class="font-semibold text-sm">PASSWORD</label>
-                                <input type="password" name="password"
-                                    class="w-full h-10 px-3 mt-1 text-black border-2 border-transparent rounded focus:border-white focus:outline-none shadow-sm transition"
-                                    required />
-                            </div>
-                            <input type="submit" value="LOGIN"
-                                class="w-full h-10 bg-white text-primary font-bold rounded cursor-pointer hover:bg-gray-100 transition" />
-                            <div class="text-center">
-                                <a href="#" class="text-white text-sm hover:underline">forget password</a>
-                            </div>
-                            <p th:if="${error}" th:text="${error}" class="text-red-300 text-sm text-center"></p>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="hidden md:block md:col-span-1"></div>
-            </div>
-        </div>
-
+    <div th:fragment="footer">
         <!-- Footer Info Section -->
         <div class="bg-primary text-white py-12 text-center">
             <h3 class="text-2xl font-bold mb-6">Stay Connected</h3>
@@ -181,6 +111,7 @@
             Developed By : Raisa
         </div>
     </div>
+
 </body>
 
 </html>

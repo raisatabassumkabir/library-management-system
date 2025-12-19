@@ -1,293 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/admin_layout :: layout(~{::content}, 'issuedBook')}">
+
 <head>
-    <meta charset="UTF-8" xmlns:th="https://thymeleaf.org">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library management system</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+    <title>Issued Books</title>
 </head>
+
 <body>
-<div class="sidebar">
-    <h2>Admin Panel</h2>
-    <a href="http://localhost:8080/adminDashboard"><i class="fa fa-home"></i> Dashboard</a>
-    <a href="http://localhost:8080/manageBook"><i class="fa fa-book"></i> Manage Book</a>
-    <a href="http://localhost:8080/issuedBook "><i class="fa fa-book-reader"></i> Issued Book</a>
-    <a href="http://localhost:8080/returnBook"><i class="fa fa-undo"></i> Return Book</a>
-    <a href="http://localhost:8080/viewMembers"><i class="fa fa-users"></i> View Members</a>
-    <a href="http://localhost:8080/index"><i class="fa fa-user-plus"></i> Add Member</a>
-    <a href="http://localhost:8080/defaulterList"><i class="fa fa-ban"></i> Defaulters </a>
-    <a href="http://localhost:8080/index"><i class="fa fa-sign-out"></i> Sign out</a>
-</div>
-<div class="content-area">
-    <div class="book-form">
-        <h2 class="form-title">Issued Books</h2>
-        <form th:action="@{/admin/issued-book}" method="post" th:object="${issuedBook}">
+    <div th:fragment="content" class="w-full max-w-7xl mx-auto" th:with="currentPage='issuedBook'">
 
-            E-mail <br> <input type="email" name="email" class="t" required /><br>
-            ISBN <br> <input type="number" name="isbn" class="t" required /><br>
-            Book Title <br> <input type="text" name="title" class="t" required /><br>
-            Issue Date <br><input type="date" name="issueDate" class="t" required /><br>
-            Return Date <br><input type="date" name="returnDate" class="t" required /><br>
+        <!-- Page Header -->
+        <div class="mb-10">
+            <h1 class="text-4xl font-serif font-bold text-slate-800 mb-2">Issued Books</h1>
+            <p class="text-slate-500 text-lg">Manage book issuance and track returned items.</p>
+        </div>
 
-            <button type="submit" class="button">ISSUE BOOK</button>
+        <div class="flex flex-col lg:flex-row gap-8 w-full">
 
-            <p th:text="${message}" style="color: red;"></p>
-            <br>
-        </form>
+            <!-- Issue Book Form -->
+            <div class="w-full lg:w-1/3 bg-white p-8 rounded-xl shadow-sm border border-gray-100 h-fit">
+                <h2 class="text-2xl font-serif font-bold text-slate-800 mb-6 pb-4 border-b border-gray-100">Issue a Book
+                </h2>
+                <form th:action="@{/admin/issued-book}" method="post" th:object="${issuedBook}"
+                    class="flex flex-col gap-5">
+
+                    <div>
+                        <label
+                            class="block text-slate-600 text-sm font-bold mb-2 uppercase tracking-wide">E-mail</label>
+                        <input type="email" name="email"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition text-slate-700 bg-slate-50"
+                            placeholder="Student Email" required />
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 text-sm font-bold mb-2 uppercase tracking-wide">ISBN</label>
+                        <input type="number" name="isbn"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition text-slate-700 bg-slate-50"
+                            placeholder="Book ISBN" required />
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 text-sm font-bold mb-2 uppercase tracking-wide">Book
+                            Title</label>
+                        <input type="text" name="title"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition text-slate-700 bg-slate-50"
+                            placeholder="Title of the Book" required />
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 text-sm font-bold mb-2 uppercase tracking-wide">Issue
+                            Date</label>
+                        <input type="date" name="issueDate"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition text-slate-700 bg-slate-50"
+                            required />
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 text-sm font-bold mb-2 uppercase tracking-wide">Return
+                            Date</label>
+                        <input type="date" name="returnDate"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition text-slate-700 bg-slate-50"
+                            required />
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 px-4 rounded-lg transition mt-4 shadow-lg shadow-blue-200 transform active:scale-95">
+                        Issue Book
+                    </button>
+
+                    <p th:if="${message}" th:text="${message}"
+                        class="text-red-500 text-center text-sm font-bold mt-2 bg-red-50 p-2 rounded border border-red-100">
+                    </p>
+                </form>
+            </div>
+
+            <!-- Issued Book List -->
+            <div class="w-full lg:w-2/3 bg-white p-8 rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <h2 class="text-2xl font-serif font-bold text-slate-800 mb-6">Issued Books Log</h2>
+                <div class="overflow-x-auto rounded-lg border border-gray-100">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-800 text-white">
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase">E-mail</th>
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase">ISBN</th>
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase">Book Title</th>
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase">Issue Date</th>
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase text-right">Return Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-slate-600">
+                            <tr th:each="book : ${issuedBookList}" class="hover:bg-slate-50 transition">
+                                <td class="p-4 font-medium" th:text="${book.email}"></td>
+                                <td class="p-4 font-mono text-sm" th:text="${book.isbn}"></td>
+                                <td class="p-4 text-slate-800 font-semibold" th:text="${book.title}"></td>
+                                <td class="p-4" th:text="${book.issueDate}"></td>
+                                <td class="p-4 text-right" th:text="${book.returnDate}"></td>
+                            </tr>
+                            <!-- Empty State (Optional: if list is empty) -->
+                            <tr th:if="${#lists.isEmpty(issuedBookList)}">
+                                <td colspan="5" class="p-8 text-center text-gray-400 italic">No books currently issued.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="book-list">
-        <table class="book-table">
-            <thead>
-            <tr>
-
-                <th>E-mail</th>
-                <th>ISBN</th>
-                <th> Book Title</th>
-                <th> Issue Date</th>
-                <th> Return Date</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book : ${issuedBookList}">
-
-                <td th:text="${book.email}"></td>
-                <td th:text="${book.isbn}"></td>
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.issueDate}"></td>
-                <td th:text="${book.returnDate}"></td>
-
-
-
-            </tr>
-
-            </tbody>
-        </table>
-
-    </div>
-</div>
 </body>
+
 </html>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fa;
-        display: flex;
-        margin: 0;
-
-    }
-    .button {
-        width: 100%;
-        height: 40px;
-        background-color: #2c7ad6;
-        color: white;
-        font-size: 18px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: background-color 0.3s ease;
-
-    }
-    .sidebar {
-        width: 250px;
-        background-color: #2c3e50;
-        height: 100%;
-        color: white;
-        padding: 20px 0;
-        position: fixed;
-    }
-
-    .sidebar h2 {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .sidebar a {
-        color: white;
-        padding: 15px 30px;
-        display: block;
-        text-decoration: none;
-    }
-
-    .sidebar a:hover {
-        background-color: #34495e;
-    }
-
-    .content-area {
-        display: flex; /* Enable flexbox for form and table */
-        flex-grow: 1; /* Allow content area to take remaining space */
-        margin-left: 250px; /* Push content to the right to accommodate sidebar */
-        margin-top: 90px;
-        padding: 40px;
-        gap: 40px; /* Space between form and table */
-        align-items: flex-start; /* Align form and table to the top */
-        margin-bottom: 20px;
-    }
-
-    h1 {
-        text-align: center;
-        color: #2c3e50;
-        margin-bottom: 40px;
-    }
-
-    .t {
-        height: 40px;
-        width: 100%;
-        border: 2px;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-bottom: 15px;
-        margin-top: 10px;
-        font-weight: bold;
-        box-shadow: 0 0 4px rgba(44, 122, 214, 0.5);
-    }
-
-    .form-title {
-        text-align: center;
-        height: 50px;
-        margin-bottom: 20px;
-        font-size: 24px;
-        color: #2c3e50;
-        font-weight: bold;
-    }
-
-    .book-form {
-        flex: 1; /* Allow the form to take up available space */
-        max-width: 500px; /* Limit the maximum width of the form */
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 12px;
-        font-weight: bold;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-
-    }
-
-    .book-form form {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .book-form label {
-        margin-top: 12px;
-        margin-bottom: 6px;
-        font-weight: bold;
-        color: #2c3e50;
-    }
-
-    .book-form input {
-        padding: 12px;
-        font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .book-form input:focus {
-        border-color: #2c7ad6;
-        box-shadow: 0 0 6px rgba(44, 122, 214, 0.3);
-        outline: none;
-    }
-
-    .book-form button {
-        margin-top: 20px;
-        padding: 12px;
-        font-size: 16px;
-        background-color: #2c7ad6;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .book-form button:hover {
-        background-color: #1b5eb0;
-    }
-
-    .book-list {
-        flex: 1; /* Allow the table to take up available space */
-        background-color: #fff;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .book-table {
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #fff;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .book-table th, .book-table td {
-        padding: 14px 12px;
-        text-align: center;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    .book-table th {
-        background-color: #2c7ad6;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    .book-table tbody tr:hover {
-        background-color: #f2f6ff;
-    }
-
-    .book-table i {
-        font-size: 18px;
-        margin: 0 8px;
-        cursor: pointer;
-        transition: transform 0.2s;
-    }
-
-    .book-table i:hover {
-        transform: scale(1.2);
-    }
-
-    .fa-edit {
-        color: #27ae60;
-    }
-
-    .fa-trash {
-        color: #e74c3c;
-    }
-
-    /* Responsive adjustments if needed */
-    @media (max-width: 900px) {
-        body {
-            flex-direction: column; /* Stack sidebar and content */
-        }
-
-        .sidebar {
-            position: static; /* Allow sidebar to flow with content */
-            width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .content-area {
-            flex-direction: column; /* Stack form and table */
-            margin-left: 0;
-            padding: 20px;
-            gap: 20px;
-        }
-
-        .book-form {
-            width: 80%;
-            margin: 0 auto 20px auto;
-        }
-
-        .book-list {
-            width: 80%;
-            margin: 0 auto;
-        }
-    }
-</style>

@@ -1,131 +1,76 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/admin_layout :: layout(~{::content}, 'defaulters')}">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Management System - Defaulters</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <title>Defaulters List</title>
 </head>
+
 <body>
+    <div th:fragment="content" class="w-full max-w-7xl mx-auto" th:with="currentPage='defaulters'">
 
-<div class="sidebar">
-    <h2>Admin Panel</h2>
-    <a href="/adminDashboard"><i class="fa fa-home"></i> Dashboard</a>
-    <a href="/manageBook"><i class="fa fa-book"></i> Manage Book</a>
-    <a href="/issuedBook"><i class="fa fa-book-reader"></i> Issued Book</a>
-    <a href="/returnBook"><i class="fa fa-undo"></i> Return Book</a>
-    <a href="http://localhost:8080/viewMembers"><i class="fa fa-users"></i> View Members</a>
-    <a href="http://localhost:8080/index"><i class="fa fa-user-plus"></i> Add Member</a>
-    <a href="http://localhost:8080/defaulterList"><i class="fa fa-ban"></i> Defaulters</a>
-    <a href="http://localhost:8080/index"><i class="fa fa-sign-out"></i> Sign Out</a>
-</div>
+        <!-- Page Header -->
+        <div class="mb-10">
+            <h1 class="text-4xl font-serif font-bold text-slate-800 mb-2">Defaulters List</h1>
+            <p class="text-slate-500 text-lg">Manage overdue books and outstanding fines.</p>
+        </div>
 
-<div class="content-area">
+        <div th:if="${msg}"
+            class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-6 py-4 rounded-lg mb-8 flex items-center gap-3 shadow-sm"
+            role="alert">
+            <i class="fa fa-check-circle text-xl"></i>
+            <p th:text="${msg}" class="font-medium"></p>
+        </div>
 
-    <div th:if="${msg}" class="alert-success" th:text="${msg}"></div>
-    <div class="book-list">
-        <h2 class="form-title">Defaulter List</h2>
-        <table class="book-table">
-            <thead>
-            <tr>
-                <th>Email</th>
-                <th>Defaulter ID</th>
-                <th>ISBN</th>
-                <th>Book Title</th>
-                <th>Issue Date</th>
-                <th>Return Date</th>
-                <th>Fine Amount</th>
-                <th> Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="defaulter : ${defaulters}">
-                <td th:text="${defaulter.email}"></td>
-                <td th:text="${defaulter.defaulterId}"></td>
-                <td th:text="${defaulter.isbn}"></td>
-                <td th:text="${defaulter.title}"></td>
-                <td th:text="${defaulter.issueDate}"></td>
-                <td th:text="${defaulter.returnDate}"></td>
-                <td th:text="${defaulter.fineAmount}">Fine</td>
-
-                <td>
-                    <form th:action="@{/admin/clearDefaulter}" method="post" style="display:inline;">
-                        <input type="hidden" name="defaulterId" th:value="${defaulter.defaulterId}">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-check"></i> Clear
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <h2 class="text-2xl font-serif font-bold text-slate-800 mb-6">Overdue Records</h2>
+            <div class="overflow-x-auto rounded-lg border border-gray-100">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800 text-white">
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Email</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">ID</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">ISBN</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Book Title</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Issue Date</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Return Date</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase text-right">Fine</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-slate-600">
+                        <tr th:each="defaulter : ${defaulters}"
+                            class="hover:bg-red-50 transition border-l-4 border-l-transparent hover:border-l-red-400">
+                            <td class="p-4 font-medium" th:text="${defaulter.email}"></td>
+                            <td class="p-4 font-mono text-xs text-slate-500" th:text="${defaulter.defaulterId}"></td>
+                            <td class="p-4 font-mono text-xs" th:text="${defaulter.isbn}"></td>
+                            <td class="p-4 font-medium text-slate-800" th:text="${defaulter.title}"></td>
+                            <td class="p-4 text-sm" th:text="${defaulter.issueDate}"></td>
+                            <td class="p-4 text-sm font-semibold text-red-500" th:text="${defaulter.returnDate}"></td>
+                            <td class="p-4 text-right font-bold text-red-600" th:text="${defaulter.fineAmount}"></td>
+                            <td class="p-4 text-center">
+                                <form th:action="@{/admin/clearDefaulter}" method="post" style="display:inline;">
+                                    <input type="hidden" name="defaulterId" th:value="${defaulter.defaulterId}">
+                                    <button type="submit"
+                                        class="bg-white border border-red-200 text-red-500 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-sm">
+                                        Clear Due
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <!-- Empty State -->
+                        <tr th:if="${#lists.isEmpty(defaulters)}">
+                            <td colspan="8"
+                                class="p-12 text-center flex flex-col items-center justify-center text-gray-400">
+                                <i class="fa fa-check-circle text-4xl mb-3 text-emerald-100"></i>
+                                <span class="text-lg font-medium text-slate-500">No active defaulters</span>
+                                <span class="text-sm">Great job! All books are returned on time.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
-
 </body>
+
 </html>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fa;
-        display: flex;
-        margin: 0;
-    }
-    .sidebar {
-        width: 250px;
-        background-color: #2c3e50;
-        height: 100vh;
-        color: white;
-        padding: 20px 0;
-        position: fixed;
-    }
-    .sidebar h2 {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .sidebar a {
-        color: white;
-        padding: 15px 30px;
-        display: block;
-        text-decoration: none;
-    }
-    .sidebar a:hover {
-        background-color: #34495e;
-    }
-    .content-area {
-        margin-left: 250px;
-        padding: 40px;
-        width: 100%;
-    }
-    .form-title {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 28px;
-        font-weight: bold;
-        color: #2c3e50;
-    }
-    .book-list {
-        background-color: #fff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        padding: 20px;
-    }
-    .book-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-    .book-table th, .book-table td {
-        padding: 12px;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-    }
-    .book-table th {
-        background-color: #2c7ad6;
-        color: white;
-        text-transform: uppercase;
-    }
-    .book-table tbody tr:hover {
-        background-color: #f2f6ff;
-    }
-</style>
