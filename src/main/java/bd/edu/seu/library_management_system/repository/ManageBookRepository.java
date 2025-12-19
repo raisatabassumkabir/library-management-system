@@ -5,15 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
 import java.util.Optional;
 
-
 @Repository
-public interface ManageBookRepository extends JpaRepository<ManageBook,Integer> {
+public interface ManageBookRepository extends JpaRepository<ManageBook, Integer> {
 
     Optional<ManageBook> findByIsbn(int isbn);
-    @Query("SELECT SUM(m.quantity) FROM ManageBook m")
+
+    @Query("SELECT SUM(m.remainingQuantity) FROM ManageBook m")
     long sumQuantities();
 
 }

@@ -1,6 +1,5 @@
 package bd.edu.seu.library_management_system.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -11,14 +10,17 @@ public class ManageBook {
     private int isbn;
     private String title;
     private String author;
-    private int quantity;
+    private int remainingQuantity;
+    private int totalQuantity;
 
-    public ManageBook(int isbn, String title, String author, int quantity) {
+    public ManageBook(int isbn, String title, String author, int remainingQuantity, int totalQuantity) {
         this.author = author;
         this.isbn = isbn;
-        this.quantity = quantity;
+        this.remainingQuantity = remainingQuantity;
+        this.totalQuantity = totalQuantity;
         this.title = title;
     }
+
     public ManageBook() {
 
     }
@@ -39,12 +41,12 @@ public class ManageBook {
         this.isbn = isbn;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getRemainingQuantity() {
+        return remainingQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setRemainingQuantity(int remainingQuantity) {
+        this.remainingQuantity = remainingQuantity;
     }
 
     public String getTitle() {
@@ -53,5 +55,13 @@ public class ManageBook {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getTotalQuantity() {
+        return totalQuantity;
+    }
+
+    public void setTotalQuantity(int totalQuantity) {
+        this.totalQuantity = totalQuantity;
     }
 }

@@ -18,6 +18,7 @@ public class RegistrationService {
 
     public void saveRegistration(Registration registration) {
         registrationRepository.save(registration);
+        
 
     }
     public List<Registration> getAllRegistrations() {
