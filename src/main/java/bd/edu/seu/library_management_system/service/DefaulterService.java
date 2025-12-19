@@ -81,66 +81,7 @@ public class DefaulterService {
         // Delete from defaulter list
         defaulterRepository.delete(defaulter);
     }
-//    public DefaulterService(IssuedBookRepository issuedBookRepository, DefaulterRepository defaulterRepository) {
-//        this.issuedBookRepository = issuedBookRepository;
-//
-//        this.defaulterRepository = defaulterRepository;
-//    }
-//public List<Defaulter> findDefaulters() {
-//    return defaulterRepository.findAll();
-//}
-//
-//    @Transactional
-//    public void updateDefaulters() {
-//        List<IssuedBook> issuedBooks = issuedBookRepository.findAll();
-//        LocalDate today = LocalDate.now();
-//
-//        // Step 1: Find which fines should exist
-//        Set<String> shouldHaveFine = new HashSet<>(); // email + isbn
-//        List<Defaulter> newDefaulters = new ArrayList<>();
-//
-//        for (IssuedBook book : issuedBooks) {
-//            if (book.getReturnDate() != null && book.getReturnDate().isBefore(today)) {
-//                String key = book.getEmail() + "-" + book.getIsbn();
-//                shouldHaveFine.add(key);
-//
-//                long daysLate = ChronoUnit.DAYS.between(book.getReturnDate(), today);
-//                long fine = daysLate * 10;
-//
-//                Defaulter defaulter = new Defaulter(
-//                        book.getIssueDate(),
-//                        book.getEmail(),
-//                        fine,
-//                        book.getIsbn(),
-//                        book.getReturnDate(),
-//                        book.getTitle()
-//                );
-//                newDefaulters.add(defaulter);
-//            }
-//        }
-//
-//        // Step 2: Delete fines that should NOT exist
-//        List<Defaulter> current = defaulterRepository.findAll();
-//        for (Defaulter d : current) {
-//            String key = d.getEmail() + "-" + d.getIsbn();
-//            if (!shouldHaveFine.contains(key)) {
-//                defaulterRepository.delete(d); // Only delete if not overdue
-//            }
-//        }
-//
-//        // Step 3: Add new fines
-//        defaulterRepository.saveAll(newDefaulters);
-//    }
-//    // New: Delete by ID
-//    @Transactional
-//    public void clearDefaulter(Long defaulterId) {
-//        defaulterRepository.deleteById(defaulterId);
-//    }
 
-//    @Transactional
-//    public void clearDefaulter(String email) {
-//      defaulterRepository.deleteByEmail(email);
-//    }
 
 }
 

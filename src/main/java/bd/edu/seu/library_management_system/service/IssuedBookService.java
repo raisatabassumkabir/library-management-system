@@ -65,17 +65,7 @@ public class IssuedBookService {
         return issuedBookRepository.findAll();
     }
 
-    // Calculate Fine
-    public long calculateFine(IssuedBook issuedBook) {
-        if (issuedBook.getReturnDate() != null) {
-            LocalDate today = LocalDate.now();
-            if (issuedBook.getReturnDate().isBefore(today)) {
-                long daysLate = ChronoUnit.DAYS.between(issuedBook.getReturnDate(), today);
-                return daysLate * 10; // Fine is 10 per day
-            }
-        }
-        return 0;
-    }
+
 
     public List<IssuedBook> findIssuedBooksByEmail(String email) {
         return issuedBookRepository.findByEmail(email);
