@@ -71,6 +71,17 @@ public class IssuedBook {
         this.title = title;
     }
 
+    @jakarta.persistence.Transient
+    private double fine;
+
+    public double getFine() {
+        return fine;
+    }
+
+    public void setFine(double fine) {
+        this.fine = fine;
+    }
+
     public long getId() {
         return id;
     }

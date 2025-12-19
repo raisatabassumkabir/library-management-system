@@ -25,7 +25,9 @@
                     <i class="fa fa-book-open text-4xl text-slate-300"></i>
                 </div>
                 <h3 class="text-lg font-medium text-slate-600 mb-1">No books borrowed</h3>
-                <p class="text-slate-400">Your reading list is currently empty.</p>
+                <!-- Debug info to confirm variable visibility -->
+                <p class="text-xs text-slate-300 mt-2"
+                    th:text="'Debug: List Size = ' + ${borrowedBooks != null ? borrowedBooks.size() : 'NULL'}"></p>
                 <a href="#"
                     class="mt-6 px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition text-sm font-semibold">Browse
                     Library</a>
@@ -39,6 +41,7 @@
                             <th class="p-4 font-semibold text-sm tracking-wide uppercase">Title</th>
                             <th class="p-4 font-semibold text-sm tracking-wide uppercase">Issue Date</th>
                             <th class="p-4 font-semibold text-sm tracking-wide uppercase">Return Date</th>
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Fine</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 text-slate-600">
@@ -47,6 +50,9 @@
                             <td class="p-4 font-medium text-slate-800" th:text="${book.title}"></td>
                             <td class="p-4" th:text="${book.issueDate}"></td>
                             <td class="p-4 font-semibold text-primary" th:text="${book.returnDate}"></td>
+                            <td class="p-4 font-semibold" th:text="${book.fine > 0 ? book.fine + ' TK' : 'No Fine'}"
+                                th:classappend="${book.fine > 0 ? 'text-red-600' : 'text-green-600'}">
+                            </td>
                         </tr>
                     </tbody>
                 </table>
