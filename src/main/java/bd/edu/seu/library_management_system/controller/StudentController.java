@@ -72,17 +72,9 @@ public class StudentController {
         System.out.println("DEBUG: Found " + defaulters.size() + " defaulter records.");
 
         borrowedBooks.forEach(book -> {
-            // Find if this book generates a fine in the defaulter list
-            // Fine exists ONLY if present in Defaulter list (which excludes 'PAID' fines)
-            Optional<Defaulter> matchingDefaulter = defaulters.stream()
-                    .filter(d -> d.getIsbn() == book.getIsbn())
-                    .findFirst();
-
-            if (matchingDefaulter.isPresent()) {
-                book.setFine(matchingDefaulter.get().getFineAmount());
-            } else {
-                book.setFine(0.0);
-            }
+            // Use direct calculation as requested by user (via added service method)
+            long calculatedFine = issuedBookService.calculateFine(book);
+            book.setFine((double) calculatedFine);
         });
 
         if (studentOptional.isPresent()) {
