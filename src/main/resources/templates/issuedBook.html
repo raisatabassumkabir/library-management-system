@@ -32,14 +32,14 @@
                     </div>
                     <div>
                         <label class="block text-slate-600 text-sm font-bold mb-2 uppercase tracking-wide">ISBN</label>
-                        <input type="number" name="isbn"
+                        <input id="isbnInput" type="number" name="isbn"
                             class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition text-slate-700 bg-slate-50"
                             placeholder="Book ISBN" required />
                     </div>
                     <div>
                         <label class="block text-slate-600 text-sm font-bold mb-2 uppercase tracking-wide">Book
                             Title</label>
-                        <input type="text" name="title"
+                        <input id="titleInput" type="text" name="title"
                             class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition text-slate-700 bg-slate-50"
                             placeholder="Title of the Book" required />
                     </div>
@@ -104,6 +104,34 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const isbnInput = document.getElementById('isbnInput');
+                const titleInput = document.getElementById('titleInput');
+
+                titleInput.addEventListener('focus', function () {
+                    const isbn = isbnInput.value;
+                    if (isbn) {
+                        fetch(`/api/book/${isbn}`)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                if (data) {
+                                    titleInput.value = data;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching book title:', error);
+                            });
+                    }
+                });
+            });
+        </script>
     </div>
 </body>
 

@@ -61,4 +61,10 @@ public class ManageBookController {
         model.addAttribute("isUpdateMode", false);
         return "manageBook";
     }
+
+    @GetMapping("/api/book/{isbn}")
+    @ResponseBody
+    public String getBookTitleByIsbn(@PathVariable int isbn) {
+        return manageBookService.getBookByIsbn(isbn).getTitle();
+    }
 }

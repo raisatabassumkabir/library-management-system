@@ -73,6 +73,7 @@ public class IssuedBookService {
                 long daysLate = ChronoUnit.DAYS.between(issuedBook.getReturnDate(), today);
                 return daysLate * 10; // Fine is 10 per day
             }
+            
         }
         return 0;
     }

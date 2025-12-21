@@ -15,7 +15,6 @@ public class IssuedBookController {
 
     public IssuedBookController(IssuedBookService issuedBookService) {
         this.issuedBookService = issuedBookService;
-
     }
 
     @GetMapping("/issuedBook")
