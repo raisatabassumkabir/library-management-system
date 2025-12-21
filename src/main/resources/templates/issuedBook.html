@@ -80,8 +80,10 @@
                                 <th class="p-4 font-semibold text-sm tracking-wide uppercase">E-mail</th>
                                 <th class="p-4 font-semibold text-sm tracking-wide uppercase">ISBN</th>
                                 <th class="p-4 font-semibold text-sm tracking-wide uppercase">Book Title</th>
-                                <th class="p-4 font-semibold text-sm tracking-wide uppercase">Issue Date</th>
-                                <th class="p-4 font-semibold text-sm tracking-wide uppercase text-right">Return Date
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase whitespace-nowrap">Issue
+                                    Date</th>
+                                <th class="p-4 font-semibold text-sm tracking-wide uppercase whitespace-nowrap">Return
+                                    Date
                                 </th>
                             </tr>
                         </thead>
@@ -91,8 +93,8 @@
                                 <td class="p-4 font-medium" th:text="${book.email}"></td>
                                 <td class="p-4 font-mono text-sm" th:text="${book.isbn}"></td>
                                 <td class="p-4 text-slate-800 font-semibold" th:text="${book.title}"></td>
-                                <td class="p-4" th:text="${book.issueDate}"></td>
-                                <td class="p-4 text-right" th:text="${book.returnDate}"></td>
+                                <td class="p-4 whitespace-nowrap" th:text="${book.issueDate}"></td>
+                                <td class="p-4 whitespace-nowrap" th:text="${book.returnDate}"></td>
                             </tr>
                             <!-- Empty State (Optional: if list is empty) -->
                             <tr th:if="${#lists.isEmpty(issuedBookList)}">
