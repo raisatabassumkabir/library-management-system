@@ -7,6 +7,9 @@ import bd.edu.seu.library_management_system.repository.IssuedBookRepository;
 import bd.edu.seu.library_management_system.repository.ManageBookRepository;
 import bd.edu.seu.library_management_system.repository.RegistrationRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,8 +65,20 @@ public class IssuedBookService {
         return issuedBookRepository.findAll();
     }
 
+    // Calculate Fine
+    public long calculateFine(IssuedBook issuedBook) {
+        if (issuedBook.getReturnDate() != null) {
+            LocalDate today = LocalDate.now();
+            if (issuedBook.getReturnDate().isBefore(today)) {
+                long daysLate = ChronoUnit.DAYS.between(issuedBook.getReturnDate(), today);
+                return daysLate * 10; // Fine is 10 per day
+            }
+        }
+        return 0;
+    }
+
     public List<IssuedBook> findIssuedBooksByEmail(String email) {
-        return issuedBookRepository.findByEmailIgnoreCase(email);
+        return issuedBookRepository.findByEmail(email);
     }
 
 }
