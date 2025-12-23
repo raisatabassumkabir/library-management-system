@@ -30,52 +30,87 @@
 
 <body>
 
-    <div th:fragment="header">
+    <div th:fragment="header(activePage)" class="sticky top-0 z-50">
         <!-- Top Info Bar -->
         <div
-            class="bg-primary h-auto md:h-9 w-full flex flex-col md:flex-row items-center justify-between px-4 md:px-24 py-1 text-white text-sm">
-            <div class="flex flex-col md:flex-row gap-4 items-center">
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200 transition">
-                    <i class="fa fa-envelope"></i> 2022100000032@gmail.com
+            class="bg-slate-950 border-b border-slate-800 h-auto md:h-10 w-full flex flex-col md:flex-row items-center justify-between px-4 md:px-24 py-1 text-slate-400 text-sm">
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <a href="#" class="flex items-center gap-2 hover:text-primary transition-colors duration-300">
+                    <i class="fa fa-envelope text-primary/80"></i> 2022100000032@gmail.com
                 </a>
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200 transition">
-                    <i class="fa fa-phone"></i> +91-73176
+                <a href="#" class="flex items-center gap-2 hover:text-primary transition-colors duration-300">
+                    <i class="fa fa-phone text-primary/80"></i> +91-73176
                 </a>
             </div>
             <div class="flex gap-4 mt-2 md:mt-0">
-                <a href="#" class="fa fa-facebook bg-white/10 p-1.5 rounded-full hover:bg-white/20 transition"></a>
-                <a href="#" class="fa fa-instagram bg-white/10 p-1.5 rounded-full hover:bg-white/20 transition"></a>
-                <a href="#" class="fa fa-twitter bg-white/10 p-1.5 rounded-full hover:bg-white/20 transition"></a>
+                <a href="#"
+                    class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-800 hover:bg-primary hover:text-white transition-all duration-300 text-xs">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="#"
+                    class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-800 hover:bg-primary hover:text-white transition-all duration-300 text-xs">
+                    <i class="fa fa-instagram"></i>
+                </a>
+                <a href="#"
+                    class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-800 hover:bg-primary hover:text-white transition-all duration-300 text-xs">
+                    <i class="fa fa-twitter"></i>
+                </a>
             </div>
         </div>
 
         <!-- Navigation Menu -->
-        <div class="bg-white shadow-md">
+        <div class="bg-slate-900 shadow-lg border-b border-slate-800">
             <div class="container mx-auto px-4 md:px-24 h-20 flex justify-between items-center">
-                <div class="text-3xl font-bold text-gray-800">
-                    LIBRARY<span class="text-primary">ZONE</span>
-                </div>
+
+                <!-- Brand -->
+                <a href="http://localhost:8080/home"
+                    class="text-2xl md:text-3xl font-bold text-white tracking-tight group">
+                    LIBRARY<span class="text-primary group-hover:text-blue-400 transition-colors">ZONE</span>
+                </a>
+
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex h-full items-center">
-                    <ul class="flex h-full">
-                        <li class="h-full flex items-center"><a href="http://localhost:8080/home"
-                                class="px-6 h-full flex items-center hover:bg-primary hover:text-white transition font-medium"><i
-                                    class="fa fa-home mr-2"></i> Home</a></li>
-                        <li class="h-full flex items-center"><a href="#"
-                                class="px-6 h-full flex items-center hover:bg-primary hover:text-white transition font-medium"><i
-                                    class="fa fa-image mr-2"></i> Gallery</a></li>
-                        <li class="h-full flex items-center"><a href="http://localhost:8080/admin"
-                                class="px-6 h-full flex items-center hover:bg-primary hover:text-white transition font-medium"><i
-                                    class="fa fa-user mr-2"></i> Admin Login</a></li>
-                        <li class="h-full flex items-center"><a href="http://localhost:8080/registration"
-                                class="px-6 h-full flex items-center hover:bg-primary hover:text-white transition font-medium"><i
-                                    class="fa fa-registered mr-2"></i> Register</a></li>
-                        <li class="h-full flex items-center"><a href="http://localhost:8080/index"
-                                class="px-6 h-full flex items-center hover:bg-primary hover:text-white transition font-medium"><i
-                                    class="fa fa-user mr-2"></i> Login</a></li>
+                    <ul class="flex h-full gap-1">
+                        <li class="h-full flex items-center">
+                            <a href="http://localhost:8080/home"
+                                th:classappend="${activePage == 'home'} ? 'text-primary' : 'text-slate-300'"
+                                class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
+                                <i class="fa fa-home text-sm"
+                                    th:classappend="${activePage == 'home'} ? 'text-primary' : 'text-primary'"></i> Home
+                            </a>
+                        </li>
+                        <li class="h-full flex items-center">
+                            <a href="#" th:classappend="${activePage == 'gallery'} ? 'text-primary' : 'text-slate-300'"
+                                class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
+                                <i class="fa fa-image text-sm text-primary"></i> Gallery
+                            </a>
+                        </li>
+                        <li class="h-full flex items-center">
+                            <a href="http://localhost:8080/admin"
+                                th:classappend="${activePage == 'admin'} ? 'text-primary' : 'text-slate-300'"
+                                class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
+                                <i class="fa fa-lock text-sm text-primary"></i> Admin
+                            </a>
+                        </li>
+                        <li class="h-full flex items-center">
+                            <a href="http://localhost:8080/registration"
+                                th:classappend="${activePage == 'register'} ? 'text-primary' : 'text-slate-300'"
+                                class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
+                                <i class="fa fa-user-plus text-sm text-primary"></i> Register
+                            </a>
+                        </li>
+                        <li class="h-full flex items-center">
+                            <a href="http://localhost:8080/index"
+                                th:classappend="${activePage == 'login'} ? 'text-primary' : 'text-slate-300'"
+                                class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
+                                <i class="fa fa-sign-in text-sm text-primary"></i> Login
+                            </a>
+                        </li>
                     </ul>
                 </div>
+
                 <!-- Mobile Menu Button -->
-                <div class="md:hidden text-2xl text-primary cursor-pointer">
+                <div class="md:hidden text-2xl text-slate-300 cursor-pointer p-2 rounded hover:bg-slate-800 transition">
                     <i class="fa fa-bars"></i>
                 </div>
             </div>
@@ -183,7 +218,7 @@
                                     <i class="fa fa-phone"></i>
                                 </div>
                                 <span
-                                    class="text-slate-400 group-hover:text-slate-200 transition-colors">+91-73176</span>
+                                    class="text-slate-400 group-hover:text-slate-200 transition-colors">+91-7317600</span>
                             </li>
                             <li class="flex items-center gap-3 group">
                                 <div

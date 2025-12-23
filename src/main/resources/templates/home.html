@@ -3,28 +3,29 @@
 
 <head th:replace="~{fragments/layout :: head}"></head>
 
-<body class="bg-gray-100 font-sans">
-    <div class="min-h-screen flex flex-col">
-        <div th:replace="~{fragments/layout :: header}"></div>
+<!-- Body -->
 
-        <!-- Hero Slider Section -->
-        <div class="relative w-full bg-cover bg-fixed bg-center min-h-[640px] flex items-center justify-center flex-grow"
-            style="background-image:url('/picture/library.png');">
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
+<body>
+    <div th:replace="~{fragments/layout :: header('home')}"></div>
 
-            <div class="container mx-auto px-4 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 w-full py-10">
+    <!-- Hero Slider Section -->
+    <div class="relative w-full bg-cover bg-fixed bg-center min-h-[640px] flex items-center justify-center flex-grow"
+        style="background-image:url('/picture/library.png');">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50"></div>
 
-                <!-- Welcome Text -->
-                <div class="md:col-span-6 text-center md:text-left flex flex-col justify-center text-white">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-2">WELCOME TO LIBRARY<span
-                            class="text-primary">ZONE</span></h1>
-                    <p class="text-xl opacity-90">Knowledge is Power</p>
-                </div>
+        <div class="container mx-auto px-4 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 w-full py-10">
+
+            <!-- Welcome Text -->
+            <div class="md:col-span-6 text-center md:text-left flex flex-col justify-center text-white">
+                <h1 class="text-4xl md:text-5xl font-bold mb-2">WELCOME TO LIBRARY<span class="text-primary">ZONE</span>
+                </h1>
+                <p class="text-xl opacity-90">Knowledge is Power</p>
             </div>
         </div>
+    </div>
 
-        <div th:replace="~{fragments/layout :: footer}"></div>
+    <div th:replace="~{fragments/layout :: footer}"></div>
     </div>
 </body>
 
