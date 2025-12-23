@@ -82,34 +82,139 @@
         </div>
     </div>
 
-    <div th:fragment="footer">
-        <!-- Footer Info Section -->
-        <div class="bg-primary text-white py-12 text-center">
-            <h3 class="text-2xl font-bold mb-6">Stay Connected</h3>
-            <div class="flex justify-center gap-6 mb-8">
-                <a href="#" class="fa fa-facebook text-2xl hover:text-gray-200 transition"></a>
-                <a href="#" class="fa fa-instagram text-2xl hover:text-gray-200 transition"></a>
-                <a href="#" class="fa fa-twitter text-2xl hover:text-gray-200 transition"></a>
+    <div th:fragment="footer" class="mt-auto">
+        <!-- New Enhanced Footer -->
+        <footer class="bg-slate-900 text-slate-300 font-sans border-t border-slate-800 relative overflow-hidden">
+            <!-- Decorative Background Element -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-blue-400 to-primary"></div>
+
+            <div class="container mx-auto px-4 md:px-24 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+                    <!-- Brand Section -->
+                    <div class="space-y-6">
+                        <div class="text-3xl font-bold text-white tracking-tight">
+                            LIBRARY<span class="text-primary">ZONE</span>
+                        </div>
+                        <p class="text-slate-400 leading-relaxed text-sm">
+                            Empowering knowledge through seamless access to resources. Your gateway to a world of books,
+                            journals, and digital content.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg group">
+                                <i class="fa fa-facebook text-lg group-hover:scale-110 transition-transform"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg group">
+                                <i class="fa fa-twitter text-lg group-hover:scale-110 transition-transform"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg group">
+                                <i class="fa fa-instagram text-lg group-hover:scale-110 transition-transform"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg group">
+                                <i class="fa fa-linkedin text-lg group-hover:scale-110 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h3 class="text-white font-bold text-lg mb-6 relative inline-block">
+                            Quick Links
+                            <span class="absolute -bottom-2 left-0 w-12 h-1 bg-primary rounded-full"></span>
+                        </h3>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="http://localhost:8080/home"
+                                    class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Home</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Gallery</a></li>
+                            <li><a href="http://localhost:8080/index"
+                                    class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Login</a></li>
+                            <li><a href="http://localhost:8080/registration"
+                                    class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Register</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Rules & Regulation</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Services (Optional extra column or merged) -->
+                    <div>
+                        <h3 class="text-white font-bold text-lg mb-6 relative inline-block">
+                            Our Services
+                            <span class="absolute -bottom-2 left-0 w-12 h-1 bg-primary rounded-full"></span>
+                        </h3>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Book Search</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Digital Archive</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Study Rooms</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                        class="fa fa-angle-right text-xs text-primary"></i> Community Events</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div>
+                        <h3 class="text-white font-bold text-lg mb-6 relative inline-block">
+                            Contact Us
+                            <span class="absolute -bottom-2 left-0 w-12 h-1 bg-primary rounded-full"></span>
+                        </h3>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-start gap-3 group">
+                                <div
+                                    class="w-8 h-8 rounded bg-slate-800 flex-shrink-0 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <span
+                                    class="leading-tight text-slate-400 group-hover:text-slate-200 transition-colors">Tejgaon,
+                                    Dhaka-1215<br>Bangladesh</span>
+                            </li>
+                            <li class="flex items-center gap-3 group">
+                                <div
+                                    class="w-8 h-8 rounded bg-slate-800 flex-shrink-0 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <span
+                                    class="text-slate-400 group-hover:text-slate-200 transition-colors">+91-73176</span>
+                            </li>
+                            <li class="flex items-center gap-3 group">
+                                <div
+                                    class="w-8 h-8 rounded bg-slate-800 flex-shrink-0 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <span
+                                    class="text-slate-400 group-hover:text-slate-200 transition-colors">2022100000032@gmail.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <h2 class="text-xl font-bold mb-4">Contact Address</h2>
-            <div class="flex flex-col gap-3 items-center text-lg">
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200">
-                    <i class="fa fa-home"></i> Address : Tejgaon, Dhaka-1215
-                </a>
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200">
-                    <i class="fa fa-phone"></i> +91-7317
-                </a>
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200">
-                    <i class="fa fa-envelope"></i> 2022100000032@gmail.com
-                </a>
+            <!-- Bottom Bar -->
+            <div class="bg-slate-950 py-6 border-t border-slate-800/50">
+                <div
+                    class="container mx-auto px-4 md:px-24 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                    <div>
+                        &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2024</span> LibraryZone. All
+                        rights reserved.
+                    </div>
+                    <div class="flex gap-6">
+                        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                        <span class="text-slate-700">|</span>
+                        <span>Developed By : Raisa</span>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <!-- Copyright Footer -->
-        <div class="bg-black text-white text-center py-2 text-sm">
-            Developed By : Raisa
-        </div>
+        </footer>
     </div>
 
 </body>

@@ -22,7 +22,7 @@
 </head>
 
 <body class="bg-gray-100 font-sans">
-    <div class="min-h-screen">
+    <div class="min-h-screen flex flex-col">
         <!-- Top Info Bar -->
         <div
             class="bg-primary h-auto md:h-9 w-full flex flex-col md:flex-row items-center justify-between px-4 md:px-24 py-1 text-white text-sm">
@@ -153,33 +153,7 @@
             </div>
         </div>
 
-        <!-- Footer Info Section -->
-        <div class="bg-primary text-white py-12 text-center">
-            <h3 class="text-2xl font-bold mb-6">Stay Connected</h3>
-            <div class="flex justify-center gap-6 mb-8">
-                <a href="#" class="fa fa-facebook text-2xl hover:text-gray-200 transition"></a>
-                <a href="#" class="fa fa-instagram text-2xl hover:text-gray-200 transition"></a>
-                <a href="#" class="fa fa-twitter text-2xl hover:text-gray-200 transition"></a>
-            </div>
-
-            <h2 class="text-xl font-bold mb-4">Contact Address</h2>
-            <div class="flex flex-col gap-3 items-center text-lg">
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200">
-                    <i class="fa fa-home"></i> Address : Tejgaon, Dhaka-1215
-                </a>
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200">
-                    <i class="fa fa-phone"></i> +91-7317
-                </a>
-                <a href="#" class="flex items-center gap-2 hover:text-gray-200">
-                    <i class="fa fa-envelope"></i> 2022100000032@gmail.com
-                </a>
-            </div>
-        </div>
-
-        <!-- Copyright Footer -->
-        <div class="bg-black text-white text-center py-2 text-sm">
-            Developed By : Raisa
-        </div>
+        <div th:replace="~{fragments/layout :: footer}"></div>
     </div>
 </body>
 
