@@ -47,6 +47,7 @@ public class StudentController {
     @PostMapping("/student-login-form")
     public String studentLogin(@RequestParam String email, @RequestParam String password, Model model) {
         boolean isValidEmailAndPasswordAndType = studentService.studentLoginAuthentication(email, password);
+        // studentService.saveStudentLogin(email);
 
         if (isValidEmailAndPasswordAndType) {
             return "redirect:/studentDashboard?email=" + email;
@@ -84,6 +85,7 @@ public class StudentController {
         // ALWAYS add these to the model so the dashboard works even if student record
         // is slightly mismatched
         model.addAttribute("borrowedBooks", borrowedBooks);
+        model.addAttribute("defaulters", defaulters);
         model.addAttribute("email", email);
 
         return "studentDashboard";

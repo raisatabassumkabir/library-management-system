@@ -3,13 +3,14 @@ package bd.edu.seu.library_management_system.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+
 @Entity
 public class Defaulter {
     private String email;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "defaulter_id")
-    private Long defaulterId;  // Unique ID
+    private Long defaulterId; // Unique ID
     private int isbn;
     private String title;
     private LocalDate issueDate;
@@ -17,7 +18,8 @@ public class Defaulter {
     private Long fineAmount;
 
     // Constructors
-    public Defaulter() {}
+    public Defaulter() {
+    }
 
     public Defaulter(LocalDate issueDate, String email, Long fineAmount, int isbn, LocalDate returnDate, String title) {
         this.issueDate = issueDate;
@@ -30,24 +32,64 @@ public class Defaulter {
     }
 
     // Getters and Setters
-    public Long getDefaulterId() { return defaulterId; }
-    public void setDefaulterId(Long defaulterId) { this.defaulterId = defaulterId; }
+    public Long getDefaulterId() {
+        return defaulterId;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setDefaulterId(Long defaulterId) {
+        this.defaulterId = defaulterId;
+    }
 
-    public int getIsbn() { return isbn; }
-    public void setIsbn(int isbn) { this.isbn = isbn; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public LocalDate getIssueDate() { return issueDate; }
-    public void setIssueDate(LocalDate issueDate) { this.issueDate = issueDate; }
+    public int getIsbn() {
+        return isbn;
+    }
 
-    public LocalDate getReturnDate() { return returnDate; }
-    public void setReturnDate(LocalDate returnDate) { this.returnDate = returnDate; }
+    public void setIsbn(int isbn) {
+        this.isbn = isbn;
+    }
 
-    public Long getFineAmount() { return fineAmount; }
-    public void setFineAmount(Long fineAmount) { this.fineAmount = fineAmount; }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
+
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public Long getFineAmount() {
+        return fineAmount;
+    }
+
+    public void setFineAmount(Long fineAmount) {
+        this.fineAmount = fineAmount;
+    }
+
+    // Alias for templates expecting 'fine'
+    public Long getFine() {
+        return fineAmount;
+    }
 }

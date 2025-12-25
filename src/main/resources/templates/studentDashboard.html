@@ -7,60 +7,98 @@
 
     <div th:replace="~{fragments/layout :: header('')}"></div>
 
-    <div class="container mx-auto px-4 md:px-24 py-12 flex-grow">
-        <!-- Page Title -->
-        <div class="mb-10">
-            <h1 class="text-4xl font-serif font-bold text-slate-800 mb-2">My Bookshelf</h1>
-            <p class="text-slate-500 text-lg">Track your borrowed books and return dates.</p>
+    <div class="container mx-auto px-4 md:px-10 py-10 flex-grow">
+
+        <!-- Profile Overview -->
+        <div class="mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-6">
+                <div
+                    class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl font-bold font-serif">
+                    <span>S</span>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-serif font-bold text-gray-800"><span>S</span>tudent</h1>
+                    <p class="text-gray-500" th:text="${email}">email@example.com</p>
+                </div>
+            </div>
         </div>
 
-        <!-- Content -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-            <h2 class="text-2xl font-serif font-bold text-slate-800 mb-6 border-b border-gray-100 pb-4">Currently
-                Borrowed</h2>
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-            <div th:if="${#lists.isEmpty(borrowedBooks)}"
-                class="text-center py-16 flex flex-col items-center justify-center">
-                <div class="bg-slate-50 p-6 rounded-full mb-4">
-                    <i class="fa fa-book-open text-4xl text-slate-300"></i>
+            <!-- Left Column: Issued Books -->
+            <div class="lg:col-span-2 space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h2 class="text-xl font-serif font-bold text-gray-800 mb-6 flex items-center gap-2">
+                        <i class="fa fa-book text-blue-600"></i> Issued Books Log
+                    </h2>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs text-gray-400 uppercase border-b bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3">Title</th>
+                                    <th class="px-4 py-3">ISBN</th>
+                                    <th class="px-4 py-3">Issue Date</th>
+                                    <th class="px-4 py-3">Return Date</th>
+                                    <th class="px-4 py-3 text-right">Fine</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr th:each="book : ${borrowedBooks}" class="hover:bg-gray-50">
+                                    <td class="px-4 py-3 font-medium text-gray-800" th:text="${book.title}">Title</td>
+                                    <td class="px-4 py-3 text-gray-500" th:text="${book.isbn}">ISBN</td>
+                                    <td class="px-4 py-3 text-gray-500" th:text="${book.issueDate}">2023-01-01</td>
+                                    <td class="px-4 py-3 text-gray-500" th:text="${book.returnDate}">2023-01-08</td>
+                                    <td class="px-4 py-3 text-right">
+                                        <span th:if="${book.fine > 0}" class="text-red-500 font-bold"
+                                            th:text="${book.fine + ' tk'}">10 tk</span>
+                                        <span th:if="${book.fine == 0}" class="text-green-500 font-medium">No
+                                            Fine</span>
+                                    </td>
+                                </tr>
+                                <tr th:if="${#lists.isEmpty(borrowedBooks)}">
+                                    <td colspan="5" class="px-4 py-8 text-center text-gray-400 italic">No books
+                                        currently borrowed.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <h3 class="text-lg font-medium text-slate-600 mb-1">No books borrowed</h3>
-                <!-- Debug info to confirm variable visibility -->
-                <p class="text-xs text-slate-300 mt-2"
-                    th:text="'Debug: List Size = ' + ${borrowedBooks != null ? borrowedBooks.size() : 'NULL'}"></p>
-                <a href="#"
-                    class="mt-6 px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition text-sm font-semibold">Browse
-                    Library</a>
             </div>
 
-            <div th:if="${!#lists.isEmpty(borrowedBooks)}" class="overflow-x-auto rounded-lg border border-gray-100">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-800 text-white shadow-md">
-                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">ISBN</th>
-                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Title</th>
-                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Issue Date</th>
-                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Return Date</th>
-                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Fine</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100 text-slate-600">
-                        <tr th:each="book : ${borrowedBooks}" class="hover:bg-slate-50 transition">
-                            <td class="p-4 font-mono text-sm" th:text="${book.isbn}"></td>
-                            <td class="p-4 font-medium text-slate-800" th:text="${book.title}"></td>
-                            <td class="p-4" th:text="${book.issueDate}"></td>
-                            <td class="p-4 font-semibold text-primary" th:text="${book.returnDate}"></td>
-                            <td class="p-4 font-semibold" th:text="${book.fine > 0 ? book.fine + ' TK' : 'No Fine'}"
-                                th:classappend="${book.fine > 0 ? 'text-red-600' : 'text-green-600'}">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Right Column: Defaulter Status & Info -->
+            <div class="space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h2 class="text-xl font-serif font-bold text-gray-800 mb-6 flex items-center gap-2">
+                        <i class="fa fa-exclamation-circle text-orange-500"></i> Defaulter History
+                    </h2>
+
+                    <div th:if="${not #lists.isEmpty(defaulters)}" class="space-y-4">
+                        <div th:each="defaulter : ${defaulters}"
+                            class="p-4 bg-orange-50 border border-orange-100 rounded-lg">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-bold text-orange-800" th:text="${defaulter.title}">Book Title</span>
+                                <span class="bg-orange-200 text-orange-800 text-xs px-2 py-1 rounded font-bold"
+                                    th:text="${defaulter.fine + ' tk'}">Fine</span>
+                            </div>
+                            <div class="text-xs text-orange-600 flex justify-between">
+                                <span>Due: <span th:text="${defaulter.returnDate}">Date</span></span>
+                                <span>ISBN: <span th:text="${defaulter.isbn}">ISBN</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div th:if="${#lists.isEmpty(defaulters)}" class="text-center py-8">
+                        <div class="bg-green-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-check text-green-500 text-2xl"></i>
+                        </div>
+                        <p class="text-gray-500">Clean record! No outstanding fines.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
 
 </body>
 
