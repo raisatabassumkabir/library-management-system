@@ -21,7 +21,7 @@ public class RegistrationService {
 
         // 1. Domain Check
         if (email == null || !email.endsWith("@seu.edu.bd")) {
-            throw new IllegalArgumentException("Email must end with @seu.edu.bd");
+            throw new IllegalArgumentException("Invalid email address");
         }
 
         // Extract part before @

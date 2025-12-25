@@ -17,10 +17,16 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration-form")
-    public String registrationSubmit(@ModelAttribute Registration registration) {
-        registrationService.saveRegistration(registration);
-        return "index";
-
+    public String registrationSubmit(@ModelAttribute Registration registration, org.springframework.ui.Model model) {
+        try {
+            registrationService.saveRegistration(registration);
+            model.addAttribute("registration", new Registration()); // Required for index.html login forms
+            return "index";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("registration", registration); // keep input
+            return "registration";
+        }
     }
 
 }
