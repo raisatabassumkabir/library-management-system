@@ -33,6 +33,12 @@
                         <form action="/registration-form" method="post" th:object="${registration}"
                             class="flex flex-col gap-4">
                             <div>
+                                <label class="text-primary font-semibold text-sm">NAME</label>
+                                <input type="text" th:field="*{name}"
+                                    class="w-full h-10 px-3 border-2 border-primary/30 rounded focus:border-primary focus:outline-none shadow-sm transition"
+                                    required />
+                            </div>
+                            <div>
                                 <label class="text-primary font-semibold text-sm">E-MAIL</label>
                                 <input type="email" name="email"
                                     class="w-full h-10 px-3 border-2 border-primary/30 rounded focus:border-primary focus:outline-none shadow-sm transition"

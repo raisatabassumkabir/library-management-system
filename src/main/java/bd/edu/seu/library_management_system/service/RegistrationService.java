@@ -18,6 +18,14 @@ public class RegistrationService {
     public void saveRegistration(Registration registration) {
         String email = registration.getEmail();
         String userType = registration.getUserType();
+        String name = registration.getName();
+
+        // 0. Name Check
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+
+        System.out.println("DEBUG: Saving registration for email: " + email + " Name: " + name);
 
         // 1. Domain Check
         if (email == null || !email.endsWith("@seu.edu.bd")) {
@@ -30,14 +38,12 @@ public class RegistrationService {
         if ("student".equalsIgnoreCase(userType)) {
             // 2. Student Check: 13 digit integer
             if (!localPart.matches("\\d{13}")) {
-                throw new IllegalArgumentException(
-                        "Student email must be a 13-digit ID (e.g., 2022100000011@seu.edu.bd)");
+                throw new IllegalArgumentException("Student email is incorrect");
             }
         } else if ("teacher".equalsIgnoreCase(userType)) {
             // 3. Teacher Check: Must contain a dot (.)
             if (!localPart.contains(".")) {
-                throw new IllegalArgumentException(
-                        "Teacher email must contain a dot (e.g., first.lastname@seu.edu.bd)");
+                throw new IllegalArgumentException("Teacher email is incorrect");
             }
         }
 

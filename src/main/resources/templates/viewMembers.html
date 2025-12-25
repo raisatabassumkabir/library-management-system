@@ -20,6 +20,7 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-slate-800 text-white shadow-md">
+                            <th class="p-4 font-semibold text-sm tracking-wide uppercase">Name</th>
                             <th class="p-4 font-semibold text-sm tracking-wide uppercase">Email</th>
                             <th class="p-4 font-semibold text-sm tracking-wide uppercase">User Type</th>
                             <th class="p-4 font-semibold text-sm tracking-wide uppercase">Account Status</th>
@@ -27,6 +28,7 @@
                     </thead>
                     <tbody class="divide-y divide-gray-100 text-slate-600">
                         <tr th:each="member : ${memberList}" class="hover:bg-slate-50 transition">
+                            <td class="p-4 font-medium text-slate-800" th:text="${member.name}"></td>
                             <td class="p-4 font-medium text-slate-800" th:text="${member.email}"></td>
                             <td class="p-4">
                                 <span
@@ -40,7 +42,7 @@
                         </tr>
                         <!-- Empty State -->
                         <tr th:if="${#lists.isEmpty(memberList)}">
-                            <td colspan="3" class="p-8 text-center text-gray-400 italic">No members found.</td>
+                            <td colspan="4" class="p-8 text-center text-gray-400 italic">No members found.</td>
                         </tr>
                     </tbody>
                 </table>

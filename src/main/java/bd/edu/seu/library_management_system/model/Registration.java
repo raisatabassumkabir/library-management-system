@@ -6,21 +6,30 @@ import jakarta.persistence.Id;
 @Entity
 public class Registration {
 
-  //private String userName;
-  @Id
-  private String email;
-  private String password;
-  private String userType;
+    // private String userName;
+    private String name;
+    @Id
+    private String email;
+    private String password;
+    private String userType;
 
-  public Registration() {
+    public Registration() {
 
-  }
+    }
 
-    public Registration(String userType,String password, String email ) {
-        this.userType= userType;
+    public Registration(String userType, String password, String email, String name) {
+        this.userType = userType;
         this.password = password;
         this.email = email;
+        this.name = name;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUserType() {
@@ -46,6 +55,5 @@ public class Registration {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
 }
