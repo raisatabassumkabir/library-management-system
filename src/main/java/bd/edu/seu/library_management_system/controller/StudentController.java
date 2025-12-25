@@ -82,6 +82,15 @@ public class StudentController {
             model.addAttribute("student", studentOptional.get());
         }
 
+        // Fetch Registration info for Name
+        Optional<bd.edu.seu.library_management_system.model.Registration> registrationOptional = registrationRepository
+                .findById(email);
+        if (registrationOptional.isPresent() && registrationOptional.get().getName() != null) {
+            model.addAttribute("userName", registrationOptional.get().getName());
+        } else {
+            model.addAttribute("userName", "Student"); // Fallback
+        }
+
         // ALWAYS add these to the model so the dashboard works even if student record
         // is slightly mismatched
         model.addAttribute("borrowedBooks", borrowedBooks);

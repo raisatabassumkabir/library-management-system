@@ -5,6 +5,7 @@ import bd.edu.seu.library_management_system.model.IssuedBook;
 import bd.edu.seu.library_management_system.model.Teacher;
 import bd.edu.seu.library_management_system.repository.DefaulterRepository;
 import bd.edu.seu.library_management_system.repository.TeacherRepository;
+import bd.edu.seu.library_management_system.repository.RegistrationRepository;
 import bd.edu.seu.library_management_system.service.DefaulterService;
 import bd.edu.seu.library_management_system.service.IssuedBookService;
 import bd.edu.seu.library_management_system.service.TeacherService;
@@ -24,15 +25,17 @@ public class TeacherController {
     private final IssuedBookService issuedBookService;
     private final DefaulterRepository defaulterRepository;
     private final DefaulterService defaulterService;
+    private final RegistrationRepository registrationRepository;
 
     public TeacherController(TeacherService teacherService, TeacherRepository teacherRepository,
             IssuedBookService issuedBookService, DefaulterRepository defaulterRepository,
-            DefaulterService defaulterService) {
+            DefaulterService defaulterService, RegistrationRepository registrationRepository) {
         this.teacherService = teacherService;
         this.teacherRepository = teacherRepository;
         this.issuedBookService = issuedBookService;
         this.defaulterRepository = defaulterRepository;
         this.defaulterService = defaulterService;
+        this.registrationRepository = registrationRepository;
     }
 
     @PostMapping("/teacher-login-form")
@@ -64,6 +67,15 @@ public class TeacherController {
 
         if (teacherOptional.isPresent()) {
             model.addAttribute("teacher", teacherOptional.get());
+        }
+
+        // Fetch Registration info for Name
+        Optional<bd.edu.seu.library_management_system.model.Registration> registrationOptional = registrationRepository
+                .findById(email);
+        if (registrationOptional.isPresent() && registrationOptional.get().getName() != null) {
+            model.addAttribute("userName", registrationOptional.get().getName());
+        } else {
+            model.addAttribute("userName", "Teacher"); // Fallback
         }
 
         model.addAttribute("borrowedBooks", borrowedBooks);

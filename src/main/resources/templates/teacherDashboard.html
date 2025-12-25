@@ -18,8 +18,7 @@
                         th:text="${teacher != null ? #strings.substring(teacher.email, 0, 1).toUpperCase() : 'T'}">T</span>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-serif font-bold text-gray-800"
-                        th:text="${teacher != null ? teacher.email : 'Teacher'}">Teacher</h1>
+                    <h1 class="text-2xl font-serif font-bold text-gray-800" th:text="${userName}">Teacher Name</h1>
                     <p class="text-gray-500" th:text="${email}">email@example.com</p>
                 </div>
             </div>
