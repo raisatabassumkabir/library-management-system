@@ -105,6 +105,66 @@
             </div>
         </div>
 
+        <!-- Our Services Section -->
+        <div class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Book Search -->
+                    <div class="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition group">
+                        <div
+                            class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary transition">
+                            <i class="fa fa-search text-2xl text-primary group-hover:text-white transition"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Book Search</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Instantly find your favorite books using our advanced live search. Filter by title, author,
+                            or ISBN to check availability in seconds.
+                        </p>
+                    </div>
+
+                    <!-- Digital Archive -->
+                    <div class="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition group">
+                        <div
+                            class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-purple-600 transition">
+                            <i class="fa fa-archive text-2xl text-purple-600 group-hover:text-white transition"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Digital Archive</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Access thousands of e-books, journals, and historical documents from anywhere. Our digital
+                            repository never sleeps.
+                        </p>
+                    </div>
+
+                    <!-- Study Rooms -->
+                    <div class="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition group">
+                        <div
+                            class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-emerald-600 transition">
+                            <i class="fa fa-users text-2xl text-emerald-600 group-hover:text-white transition"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Study Rooms</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Need a quiet place to focus? Book one of our private study rooms equipped with whiteboards
+                            and high-speed internet.
+                        </p>
+                    </div>
+
+                    <!-- Community Events -->
+                    <div class="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition group">
+                        <div
+                            class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-orange-600 transition">
+                            <i class="fa fa-calendar text-2xl text-orange-600 group-hover:text-white transition"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Community Events</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Join our vibrant community. Participate in weekly workshops, book clubs, and author
+                            meet-and-greet sessions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div th:replace="~{fragments/layout :: footer}"></div>
     </div>
 </body>
