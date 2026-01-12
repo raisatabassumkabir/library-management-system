@@ -26,22 +26,14 @@
                 <h2 class="text-2xl font-serif font-bold text-slate-800">Overdue Records</h2>
 
                 <!-- Search Defaulters -->
-                <form th:action="@{/defaulterList}" method="get" class="flex gap-2 w-full md:w-auto mt-4 md:mt-0">
+                <div class="flex gap-2 w-full md:w-auto mt-4 md:mt-0">
                     <div class="relative w-full md:w-80">
-                        <input type="text" name="query"
+                        <input type="text" id="defaulterSearchInput"
                             class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm"
-                            placeholder="Search by Email or partial digits..." th:value="${param.query}">
+                            placeholder="Type to search by Email or digits..." th:value="${param.query}">
                         <i class="fa fa-search absolute left-3 top-2.5 text-gray-400"></i>
                     </div>
-                    <button type="submit"
-                        class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 rounded-lg text-sm font-bold transition">
-                        Search
-                    </button>
-                    <a th:if="${param.query}" th:href="@{/defaulterList}"
-                        class="bg-gray-200 hover:bg-gray-300 text-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition flex items-center">
-                        Clear
-                    </a>
-                </form>
+                </div>
             </div>
 
             <div class="overflow-x-auto rounded-lg border border-gray-100">
@@ -58,7 +50,8 @@
                             <th class="p-4 font-semibold text-sm tracking-wide uppercase text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100 text-slate-600">
+                    <tbody th:fragment="defaulterTableBody" id="defaulterTableBody"
+                        class="divide-y divide-gray-100 text-slate-600">
                         <tr th:each="defaulter : ${defaulters}"
                             class="hover:bg-red-50 transition border-l-4 border-l-transparent hover:border-l-red-400">
                             <td class="p-4 font-medium" th:text="${defaulter.email}"></td>
@@ -92,6 +85,26 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('defaulterSearchInput');
+            const tableBody = document.getElementById('defaulterTableBody');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', function (e) {
+                    const query = e.target.value;
+
+                    // Fetch fragment
+                    fetch('/admin/defaulters/search-fragment?query=' + encodeURIComponent(query))
+                        .then(response => response.text())
+                        .then(html => {
+                            tableBody.innerHTML = html;
+                        })
+                        .catch(error => console.error('Error fetching search results:', error));
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

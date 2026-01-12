@@ -71,4 +71,14 @@ public class ManageBookController {
     public String getBookTitleByIsbn(@PathVariable int isbn) {
         return manageBookService.getBookByIsbn(isbn).getTitle();
     }
+
+    @GetMapping("/admin/books/search-fragment")
+    public String searchBooksFragment(@RequestParam(required = false) String query, Model model) {
+        if (query != null && !query.isEmpty()) {
+            model.addAttribute("manageBookList", manageBookService.searchBooks(query));
+        } else {
+            model.addAttribute("manageBookList", manageBookService.getAllBooks());
+        }
+        return "manageBook :: bookTableBody";
+    }
 }

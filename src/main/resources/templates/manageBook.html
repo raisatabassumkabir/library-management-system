@@ -62,22 +62,12 @@
 
                 <!-- Search Books -->
                 <div class="mb-6">
-                    <form th:action="@{/manageBook}" method="get" class="flex gap-2">
-                        <div class="relative w-full">
-                            <input type="text" name="query"
-                                class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm"
-                                placeholder="Search by Title, Author, or ISBN..." th:value="${param.query}">
-                            <i class="fa fa-search absolute left-3 top-2.5 text-gray-400"></i>
-                        </div>
-                        <button type="submit"
-                            class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 rounded-lg text-sm font-bold transition">
-                            Search
-                        </button>
-                        <a th:if="${param.query}" th:href="@{/manageBook}"
-                            class="bg-gray-200 hover:bg-gray-300 text-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition flex items-center">
-                            Clear
-                        </a>
-                    </form>
+                    <div class="relative w-full">
+                        <input type="text" id="bookSearchInput"
+                            class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm"
+                            placeholder="Type to search by Title, Author, or ISBN..." th:value="${param.query}">
+                        <i class="fa fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto rounded-lg border border-gray-100">
@@ -95,7 +85,8 @@
                                 <th class="p-4 font-semibold text-sm tracking-wide uppercase text-center">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100 text-slate-600">
+                        <tbody th:fragment="bookTableBody" id="bookTableBody"
+                            class="divide-y divide-gray-100 text-slate-600">
                             <tr th:each="book : ${manageBookList}" class="hover:bg-slate-50 transition">
                                 <td class="p-4 font-mono text-sm" th:text="${book.isbn}"></td>
                                 <td class="p-4 font-medium text-slate-800" th:text="${book.title}"></td>
@@ -131,6 +122,26 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('bookSearchInput');
+            const tableBody = document.getElementById('bookTableBody');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', function (e) {
+                    const query = e.target.value;
+
+                    // Fetch fragment
+                    fetch('/admin/books/search-fragment?query=' + encodeURIComponent(query))
+                        .then(response => response.text())
+                        .then(html => {
+                            tableBody.innerHTML = html;
+                        })
+                        .catch(error => console.error('Error fetching search results:', error));
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -36,4 +36,15 @@ public class DefaulterController {
         return "redirect:/defaulterList";
     }
 
+    @GetMapping("/admin/defaulters/search-fragment")
+    public String searchDefaultersFragment(@RequestParam(required = false) String query, Model model) {
+        defaulterService.updateDefaulters(); // Likely acceptable for live search or could be optimized out
+        if (query != null && !query.isEmpty()) {
+            model.addAttribute("defaulters", defaulterService.searchDefaulters(query));
+        } else {
+            model.addAttribute("defaulters", defaulterService.findDefaulters());
+        }
+        return "defaulterList :: defaulterTableBody";
+    }
+
 }
