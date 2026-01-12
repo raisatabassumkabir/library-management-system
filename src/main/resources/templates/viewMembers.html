@@ -31,9 +31,9 @@
                             <td class="p-4 font-medium text-slate-800" th:text="${member.name}"></td>
                             <td class="p-4 font-medium text-slate-800" th:text="${member.email}"></td>
                             <td class="p-4">
-                                <span
-                                    class="px-3 py-1 bg-blue-50 text-primary rounded-full text-xs font-bold uppercase tracking-wider"
-                                    th:text="${member.userType}">STUDENT</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
+                                    th:classappend="${#strings.equalsIgnoreCase(member.userType, 'student') ? 'bg-blue-50 text-blue-600' : 'bg-purple-50 text-purple-600'}"
+                                    th:text="${member.userType}">USER</span>
                             </td>
                             <td class="p-4">
                                 <span class="flex items-center gap-2 text-emerald-600 text-sm font-medium"><i

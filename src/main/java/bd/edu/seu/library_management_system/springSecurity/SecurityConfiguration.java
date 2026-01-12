@@ -12,43 +12,48 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(request -> request
-                .requestMatchers("/", "/registration", "/index", "/home", "/error", "/gallery",
-                        "/registration-form", "/student-login-form", "/teacher-login-form", "/admin-login-form",
-                        "/studentDashboard", "/teacherDashboard", "/adminDashboard",
-                        "/manageBook", "/defaulterList", "/viewMembers", "/issuedBook", "/returnBook", "/admin",
-                        "/admin/issued-book", "/admin/manage-book", "/admin/update-book", "/admin/delete-book/**",
-                        "/admin/clearDefaulter", "/admin/return-book")
-                .permitAll()
-                .requestMatchers("/picture/**", "/css/**", "/uploads/**", "/user/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated())
-                .formLogin(form -> form.loginPage("/login")
-                        .usernameParameter("email")
-                        .passwordParameter("password")
-                        .successForwardUrl("/user_dashboard")
-                        .failureForwardUrl("/login?error=true")
-                        .permitAll())
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/user-info-form", "/saveContactDetails",
-                                "/student-login-form", "/teacher-login-form", "/admin-login-form", "/registration-form",
-                                "/admin/**"))
-                .build();
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                return http.authorizeHttpRequests(request -> request
+                                .requestMatchers("/", "/registration", "/index", "/home", "/error", "/gallery",
+                                                "/registration-form", "/student-login-form", "/teacher-login-form",
+                                                "/admin-login-form",
+                                                "/studentDashboard", "/teacherDashboard", "/adminDashboard",
+                                                "/manageBook", "/defaulterList", "/viewMembers", "/issuedBook",
+                                                "/returnBook", "/admin",
+                                                "/admin/issued-book", "/admin/manage-book", "/admin/update-book",
+                                                "/admin/delete-book/**",
+                                                "/admin/clearDefaulter", "/admin/return-book",
+                                                "/admin/books/search-fragment", "/admin/defaulters/search-fragment")
+                                .permitAll()
+                                .requestMatchers("/picture/**", "/css/**", "/uploads/**", "/user/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
+                                .formLogin(form -> form.loginPage("/login")
+                                                .usernameParameter("email")
+                                                .passwordParameter("password")
+                                                .successForwardUrl("/user_dashboard")
+                                                .failureForwardUrl("/login?error=true")
+                                                .permitAll())
+                                .csrf(csrf -> csrf
+                                                .ignoringRequestMatchers("/user-info-form", "/saveContactDetails",
+                                                                "/student-login-form", "/teacher-login-form",
+                                                                "/admin-login-form", "/registration-form",
+                                                                "/admin/**"))
+                                .build();
 
-    }
+        }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+                        throws Exception {
+                return authenticationConfiguration.getAuthenticationManager();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
 }
