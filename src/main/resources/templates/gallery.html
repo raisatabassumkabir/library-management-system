@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-gray-50 font-sans flex flex-col min-h-screen">
+    <!-- Header -->
+    <div th:replace="~{fragments/layout :: header('gallery')}"></div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <div class="relative bg-slate-900 py-20 overflow-hidden">
+            <div class="absolute inset-0 opacity-20 bg-[url('/picture/library.png')] bg-cover bg-center"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/80 to-slate-900"></div>
+
+            <div class="container mx-auto px-4 relative z-10 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                    Our <span class="text-primary">Gallery</span>
+                </h1>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Take a visual journey through our state-of-the-art facilities, extensive collections, and vibrant
+                    community spaces.
+                </p>
+            </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="container mx-auto px-4 py-16">
+            <!-- Filter Categories (Visual only for now) -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button
+                    class="px-6 py-2 rounded-full bg-primary text-white font-medium shadow-lg shadow-primary/30 transition-transform hover:-translate-y-1">All
+                    Photos</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-white text-slate-600 font-medium hover:bg-slate-100 transition-transform hover:-translate-y-1 shadow-sm border border-slate-200">Reading
+                    Halls</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-white text-slate-600 font-medium hover:bg-slate-100 transition-transform hover:-translate-y-1 shadow-sm border border-slate-200">Events</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-white text-slate-600 font-medium hover:bg-slate-100 transition-transform hover:-translate-y-1 shadow-sm border border-slate-200">Archives</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gallery Item 1 -->
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl bg-white aspect-[4/3]">
+                    <img src="/picture/library.png" alt="Library Interior"
+                        class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span
+                            class="text-primary text-sm font-bold tracking-wider uppercase mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Interior</span>
+                        <h3
+                            class="text-white text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                            Main Reading Hall</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl bg-white aspect-[4/3]">
+                    <!-- Using pseudo-image (color block) to simulate variety since we only have one image -->
+                    <img src="/picture/library.png" alt="Study Area"
+                        class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 grayscale brightness-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span
+                            class="text-primary text-sm font-bold tracking-wider uppercase mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Facilities</span>
+                        <h3
+                            class="text-white text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                            Quiet Study Zones</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl bg-white aspect-[4/3]">
+                    <img src="/picture/library.png" alt="Digital Corner"
+                        class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 sepia-[.3]">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span
+                            class="text-primary text-sm font-bold tracking-wider uppercase mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Technology</span>
+                        <h3
+                            class="text-white text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                            Digital Access Hub</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl bg-white aspect-[4/3]">
+                    <img src="/picture/library.png" alt="Archives"
+                        class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 brightness-50">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span
+                            class="text-primary text-sm font-bold tracking-wider uppercase mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Collection</span>
+                        <h3
+                            class="text-white text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                            Historical Archives</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl bg-white aspect-[4/3]">
+                    <img src="/picture/library.png" alt="Events"
+                        class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 hue-rotate-15">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span
+                            class="text-primary text-sm font-bold tracking-wider uppercase mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Community</span>
+                        <h3
+                            class="text-white text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                            Book Launch Events</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-xl bg-white aspect-[4/3]">
+                    <img src="/picture/library.png" alt="Group Study"
+                        class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 contrast-125">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span
+                            class="text-primary text-sm font-bold tracking-wider uppercase mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Collaboration</span>
+                        <h3
+                            class="text-white text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                            Group Discussion Rooms</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Load More (Mock) -->
+            <div class="text-center mt-12">
+                <button
+                    class="group inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:border-primary hover:text-primary transition-all duration-300">
+                    Load More Photos
+                    <i class="fa fa-arrow-down transform group-hover:translate-y-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+
+</html>
