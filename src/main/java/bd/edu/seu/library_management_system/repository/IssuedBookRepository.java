@@ -15,4 +15,6 @@ public interface IssuedBookRepository extends JpaRepository<IssuedBook, Long> {
     List<IssuedBook> findByEmail(String email);
 
     long countByIsbn(int isbn);
+
+    List<IssuedBook> findByIsbn(int isbn);
 }
