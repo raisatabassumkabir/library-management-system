@@ -8,6 +8,6 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:/D:/library_Management_System/uploads/");
+                .addResourceLocations("file:/C:/Users/User/Desktop/Advance Java/library_Management_System/uploads/");
     }
 }
