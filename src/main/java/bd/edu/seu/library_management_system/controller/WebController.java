@@ -34,4 +34,9 @@ public class WebController {
         return "registration";
     }
 
+    @GetMapping("/gallery")
+    public String galleryPage() {
+        return "gallery";
+    }
+
 }

@@ -80,30 +80,39 @@
                             </a>
                         </li>
                         <li class="h-full flex items-center">
-                            <a href="#" th:classappend="${activePage == 'gallery'} ? 'text-primary' : 'text-slate-300'"
+                            <a href="http://localhost:8080/gallery"
+                                th:classappend="${activePage == 'gallery'} ? 'text-primary' : 'text-slate-300'"
                                 class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
                                 <i class="fa fa-image text-sm text-primary"></i> Gallery
                             </a>
                         </li>
-                        <li class="h-full flex items-center">
+                        <!-- Only show Admin, Register, Login when NOT logged in (email is null) -->
+                        <li class="h-full flex items-center" th:if="${email == null}">
                             <a href="http://localhost:8080/admin"
                                 th:classappend="${activePage == 'admin'} ? 'text-primary' : 'text-slate-300'"
                                 class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
                                 <i class="fa fa-lock text-sm text-primary"></i> Admin
                             </a>
                         </li>
-                        <li class="h-full flex items-center">
+                        <li class="h-full flex items-center" th:if="${email == null}">
                             <a href="http://localhost:8080/registration"
                                 th:classappend="${activePage == 'register'} ? 'text-primary' : 'text-slate-300'"
                                 class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
                                 <i class="fa fa-user-plus text-sm text-primary"></i> Register
                             </a>
                         </li>
-                        <li class="h-full flex items-center">
+                        <li class="h-full flex items-center" th:if="${email == null}">
                             <a href="http://localhost:8080/index"
                                 th:classappend="${activePage == 'login'} ? 'text-primary' : 'text-slate-300'"
                                 class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
                                 <i class="fa fa-sign-in text-sm text-primary"></i> Login
+                            </a>
+                        </li>
+                        <!-- Show Logout when logged in (email is present) -->
+                        <li class="h-full flex items-center" th:if="${email != null}">
+                            <a href="http://localhost:8080/home"
+                                class="px-5 py-2 rounded-lg hover:text-white text-slate-300 hover:bg-red-500/20 hover:text-red-400 transition-all duration-300 font-medium flex items-center gap-2">
+                                <i class="fa fa-sign-out text-sm text-red-500"></i> Logout
                             </a>
                         </li>
                     </ul>
@@ -165,7 +174,8 @@
                             <li><a href="http://localhost:8080/home"
                                     class="hover:text-primary transition-colors flex items-center gap-2"><i
                                         class="fa fa-angle-right text-xs text-primary"></i> Home</a></li>
-                            <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                            <li><a href="http://localhost:8080/gallery"
+                                    class="hover:text-primary transition-colors flex items-center gap-2"><i
                                         class="fa fa-angle-right text-xs text-primary"></i> Gallery</a></li>
                             <li><a href="http://localhost:8080/index"
                                     class="hover:text-primary transition-colors flex items-center gap-2"><i
