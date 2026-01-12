@@ -13,4 +13,6 @@ public interface DefaulterRepository extends JpaRepository<Defaulter, Long> {
     void deleteByEmail(String email);
 
     List<Defaulter> findByEmail(String email);
+
+    List<Defaulter> findByEmailContainingIgnoreCase(String email);
 }

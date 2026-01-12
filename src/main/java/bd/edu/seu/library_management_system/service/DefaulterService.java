@@ -40,6 +40,13 @@ public class DefaulterService {
         return defaulterRepository.findAll();
     }
 
+    public List<Defaulter> searchDefaulters(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return findDefaulters();
+        }
+        return defaulterRepository.findByEmailContainingIgnoreCase(query.trim());
+    }
+
     @Transactional
     public void updateDefaulters() {
         defaulterRepository.deleteAll(); // Start fresh

@@ -19,9 +19,13 @@ public class DefaulterController {
     }
 
     @GetMapping("/defaulterList")
-    public String defaulterListPage(Model model) {
+    public String defaulterListPage(@RequestParam(required = false) String query, Model model) {
         defaulterService.updateDefaulters(); // Refreshes list
-        model.addAttribute("defaulters", defaulterService.findDefaulters());
+        if (query != null && !query.isEmpty()) {
+            model.addAttribute("defaulters", defaulterService.searchDefaulters(query));
+        } else {
+            model.addAttribute("defaulters", defaulterService.findDefaulters());
+        }
         return "defaulterList";
     }
 

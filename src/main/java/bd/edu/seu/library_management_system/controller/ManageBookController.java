@@ -16,9 +16,13 @@ public class ManageBookController {
     }
 
     @GetMapping("/manageBook")
-    public String manageBookPage(Model model) {
+    public String manageBookPage(@RequestParam(required = false) String query, Model model) {
         model.addAttribute("manageBook", new ManageBook());
-        model.addAttribute("manageBookList", manageBookService.getAllBooks());
+        if (query != null && !query.isEmpty()) {
+            model.addAttribute("manageBookList", manageBookService.searchBooks(query));
+        } else {
+            model.addAttribute("manageBookList", manageBookService.getAllBooks());
+        }
         model.addAttribute("isUpdateMode", false);
         return "manageBook";
     }

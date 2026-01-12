@@ -59,6 +59,27 @@
             <!-- Book List -->
             <div class="w-full lg:w-2/3 bg-white p-8 rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <h2 class="text-2xl font-serif font-bold text-slate-800 mb-6">Inventory List</h2>
+
+                <!-- Search Books -->
+                <div class="mb-6">
+                    <form th:action="@{/manageBook}" method="get" class="flex gap-2">
+                        <div class="relative w-full">
+                            <input type="text" name="query"
+                                class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm"
+                                placeholder="Search by Title, Author, or ISBN..." th:value="${param.query}">
+                            <i class="fa fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                        </div>
+                        <button type="submit"
+                            class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 rounded-lg text-sm font-bold transition">
+                            Search
+                        </button>
+                        <a th:if="${param.query}" th:href="@{/manageBook}"
+                            class="bg-gray-200 hover:bg-gray-300 text-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition flex items-center">
+                            Clear
+                        </a>
+                    </form>
+                </div>
+
                 <div class="overflow-x-auto rounded-lg border border-gray-100">
                     <table class="w-full text-left border-collapse">
                         <thead>

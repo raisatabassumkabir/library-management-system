@@ -19,4 +19,5 @@ public class ViewMembers {
         model.addAttribute("memberList", registrationService.getAllRegistrations());
         return "viewMembers";
     }
+
 }

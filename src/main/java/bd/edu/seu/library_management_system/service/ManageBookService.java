@@ -5,6 +5,7 @@ import bd.edu.seu.library_management_system.repository.IssuedBookRepository;
 import bd.edu.seu.library_management_system.repository.ManageBookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,8 +60,34 @@ public class ManageBookService {
         manageBookRepository.deleteById(isbn);
     }
 
-    // Data Migration / Initialization Fix
-    // This method runs once on startup to fix or verify book data
+    public List<ManageBook> searchBooks(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return getAllBooks();
+        }
+
+        String searchTerm = query.trim();
+        List<ManageBook> results = new ArrayList<>();
+
+        // Check if query is numeric (for ISBN search)
+        if (searchTerm.matches("\\d+")) {
+            try {
+                int isbn = Integer.parseInt(searchTerm);
+                Optional<ManageBook> book = manageBookRepository.findByIsbn(isbn);
+                book.ifPresent(results::add);
+            } catch (NumberFormatException e) {
+                // Ignore, proceed to other searches
+            }
+        }
+
+        // Search by Title or writer
+        results.addAll(manageBookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(searchTerm,
+                searchTerm));
+
+        return results;
+    }
+
+    //  Initialization Fix
+    // method runs once on startup to fix  book data
     @jakarta.annotation.PostConstruct
     public void fixTotalQuantities() {
         List<ManageBook> allBooks = manageBookRepository.findAll();
@@ -69,17 +96,7 @@ public class ManageBookService {
 
         for (ManageBook book : allBooks) {
             long borrowedCount = issuedBookRepository.countByIsbn(book.getIsbn());
-            // Expected Total should effectively be: what's on the shelf (remaining) +
-            // what's out (borrowed).
-            // NOTE: The 'Total Quantity' is the master record of Inventory. 'Remaining'
-            // changes.
-            // However, since we are correcting data, we assume 'Total' might be wrong if it
-            // doesn't account for issued books.
 
-            // Case 1: Total is 0 (Legacy uninitialized).
-            // Case 2: Total == Remaining, but there ARE borrowed books. This means Total is
-            // under-counted.
-            // Example: Total 7, Remaining 7, Borrowed 1. Real Total should be 8.
 
             int currentTotal = book.getTotalQuantity();
             int currentRemaining = book.getRemainingQuantity();
