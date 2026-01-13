@@ -22,7 +22,7 @@ public class SecurityConfiguration {
                                                 "/manageBook", "/defaulterList", "/viewMembers", "/issuedBook",
                                                 "/returnBook", "/admin",
                                                 "/admin/issued-book", "/admin/manage-book", "/admin/update-book",
-                                                "/admin/delete-book/**",
+                                                "/admin/edit-book/**", "/admin/delete-book/**",
                                                 "/admin/clearDefaulter", "/admin/return-book",
                                                 "/admin/books/search-fragment", "/admin/defaulters/search-fragment")
                                 .permitAll()
