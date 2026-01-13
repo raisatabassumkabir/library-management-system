@@ -20,9 +20,7 @@ public class ManageBookService {
     }
 
     public void manageBook(ManageBook manageBook) {
-        // When adding a new book, Total Quantity is the input.
-        // Remaining Quantity (remainingQuantity) should be initialized to Total
-        // Quantity.
+    
         manageBook.setRemainingQuantity(manageBook.getTotalQuantity());
         manageBookRepository.save(manageBook);
     }
@@ -68,7 +66,7 @@ public class ManageBookService {
         String searchTerm = query.trim();
         List<ManageBook> results = new ArrayList<>();
 
-        // Check if query is numeric (for ISBN search)
+        //  query is numeric (for ISBN search)
         if (searchTerm.matches("\\d+")) {
             try {
                 int isbn = Integer.parseInt(searchTerm);
@@ -86,8 +84,6 @@ public class ManageBookService {
         return results;
     }
 
-    //  Initialization Fix
-    // method runs once on startup to fix  book data
     @jakarta.annotation.PostConstruct
     public void fixTotalQuantities() {
         List<ManageBook> allBooks = manageBookRepository.findAll();
