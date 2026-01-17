@@ -12,7 +12,6 @@ import bd.edu.seu.library_management_system.service.TeacherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -20,6 +19,8 @@ import java.util.Optional;
 
 @Controller
 public class TeacherController {
+    // TeacherService logic moved to secure login, but keeping injection in case
+    // needed elsewhere in future
     private final TeacherService teacherService;
     private final TeacherRepository teacherRepository;
     private final IssuedBookService issuedBookService;
@@ -38,19 +39,11 @@ public class TeacherController {
         this.registrationRepository = registrationRepository;
     }
 
-    @PostMapping("/teacher-login-form")
-    public String teacherLogin(@RequestParam String email, @RequestParam String password, Model model) {
-        boolean isValid = teacherService.teacherLoginAuthentication(email, password);
-        if (isValid) {
-            return "redirect:/teacherDashboard?email=" + email;
-        } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "index";
-        }
-    }
+    // Manual login removed in favor of Spring Security
 
     @GetMapping("/teacherDashboard")
-    public String teacherDashboard(@RequestParam String email, Model model) {
+    public String teacherDashboard(java.security.Principal principal, Model model) {
+        String email = principal.getName();
         email = email.trim();
         Optional<Teacher> teacherOptional = teacherRepository.findByEmail(email);
 

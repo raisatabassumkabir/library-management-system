@@ -23,6 +23,11 @@ public class WebController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "index";
+    }
+
     @GetMapping("/admin")
     public String adminPage() {
         return "admin";

@@ -10,9 +10,12 @@ import java.util.List;
 public class RegistrationService {
 
     private final RegistrationRepository registrationRepository;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
-    public RegistrationService(RegistrationRepository registrationRepository) {
+    public RegistrationService(RegistrationRepository registrationRepository,
+            org.springframework.security.crypto.password.PasswordEncoder passwordEncoder) {
         this.registrationRepository = registrationRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void saveRegistration(Registration registration) {
@@ -47,6 +50,8 @@ public class RegistrationService {
             }
         }
 
+        // Encode password before saving
+        registration.setPassword(passwordEncoder.encode(registration.getPassword()));
         registrationRepository.save(registration);
     }
 

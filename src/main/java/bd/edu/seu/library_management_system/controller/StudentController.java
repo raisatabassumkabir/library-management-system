@@ -13,7 +13,6 @@ import bd.edu.seu.library_management_system.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -25,7 +24,7 @@ public class StudentController {
     private final StudentRepository studentRepository;
     private final RegistrationRepository registrationRepository;
     private final RegistrationService registrationService;
-    private final StudentService studentService;
+    // StudentService logic moved to secure login flow
     private final IssuedBookService issuedBookService;
     private final DefaulterRepository defaulterRepository;
     private final DefaulterService defaulterService;
@@ -38,27 +37,18 @@ public class StudentController {
         this.studentRepository = studentRepository;
         this.registrationRepository = registrationRepository;
         this.registrationService = registrationService;
-        this.studentService = studentService;
+        // this.studentService = studentService; // Kept via dependency injection but
+        // field is unused - to be safe removing usage
         this.issuedBookService = issuedBookService;
         this.defaulterRepository = defaulterRepository;
         this.defaulterService = defaulterService;
     }
 
-    @PostMapping("/student-login-form")
-    public String studentLogin(@RequestParam String email, @RequestParam String password, Model model) {
-        boolean isValidEmailAndPasswordAndType = studentService.studentLoginAuthentication(email, password);
-        // studentService.saveStudentLogin(email);
-
-        if (isValidEmailAndPasswordAndType) {
-            return "redirect:/studentDashboard?email=" + email;
-        } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "index";
-        }
-    }
+    // Manual login removed in favor of Spring Security
 
     @GetMapping("/studentDashboard")
-    public String studentDashboardPage(@RequestParam String email, Model model) {
+    public String studentDashboardPage(java.security.Principal principal, Model model) {
+        String email = principal.getName();
         email = email.trim(); // Ensure no leading/trailing spaces
         Optional<Student> studentOptional = studentRepository.findByEmail(email);
 
