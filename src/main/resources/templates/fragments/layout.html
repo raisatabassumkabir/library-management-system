@@ -71,7 +71,7 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex h-full items-center">
                     <ul class="flex h-full gap-1">
-                        <li class="h-full flex items-center">
+                        <li class="h-full flex items-center" th:if="${email == null}">
                             <a href="http://localhost:8080/home"
                                 th:classappend="${activePage == 'home'} ? 'text-primary' : 'text-slate-300'"
                                 class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
@@ -79,7 +79,7 @@
                                     th:classappend="${activePage == 'home'} ? 'text-primary' : 'text-primary'"></i> Home
                             </a>
                         </li>
-                        <li class="h-full flex items-center">
+                        <li class="h-full flex items-center" th:if="${email == null}">
                             <a href="http://localhost:8080/gallery"
                                 th:classappend="${activePage == 'gallery'} ? 'text-primary' : 'text-slate-300'"
                                 class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
@@ -87,13 +87,7 @@
                             </a>
                         </li>
                         <!-- Only show Admin, Register, Login when NOT logged in (email is null) -->
-                        <li class="h-full flex items-center" th:if="${email == null}">
-                            <a href="http://localhost:8080/admin"
-                                th:classappend="${activePage == 'admin'} ? 'text-primary' : 'text-slate-300'"
-                                class="px-5 py-2 rounded-lg hover:text-white hover:bg-slate-800 transition-all duration-300 font-medium flex items-center gap-2">
-                                <i class="fa fa-lock text-sm text-primary"></i> Admin
-                            </a>
-                        </li>
+
                         <li class="h-full flex items-center" th:if="${email == null}">
                             <a href="http://localhost:8080/registration"
                                 th:classappend="${activePage == 'register'} ? 'text-primary' : 'text-slate-300'"

@@ -23,6 +23,83 @@
             </div>
         </div>
 
+        <!-- Search Section -->
+        <div class="mb-12">
+            <!-- Search Box -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 mb-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-serif font-bold text-gray-800 mb-2">Find a Book</h2>
+                    <p class="text-gray-500 mb-6 text-sm">Search our entire collection by title, author, or ISBN</p>
+
+                    <form action="/studentDashboard" method="get" class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-grow relative">
+                            <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" name="query" th:value="${query}"
+                                class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-gray-50 focus:bg-white"
+                                placeholder="Enter book title, author, or ISBN..." required>
+                        </div>
+                        <button type="submit"
+                            class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-medium transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                            Search Collection
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div th:if="${query != null}" class="animate-fade-in-up">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-700" th:text="'Results for: ' + ${query}">Results</h3>
+                    <a href="/studentDashboard" class="text-sm text-gray-500 hover:text-primary"><i
+                            class="fa fa-times-circle"></i> Clear Search</a>
+                </div>
+
+                <div th:if="${#lists.isEmpty(books)}"
+                    class="bg-yellow-50 border border-yellow-200 p-8 rounded-xl text-center">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-search-minus text-yellow-600 text-2xl"></i>
+                    </div>
+                    <p class="text-yellow-800 font-bold mb-1">No matches found</p>
+                    <p class="text-yellow-600 text-sm">Try checking your spelling or search for a different term.</p>
+                </div>
+
+                <div th:if="${not #lists.isEmpty(books)}"
+                    class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4 font-semibold">Title</th>
+                                    <th class="px-6 py-4 font-semibold">Author</th>
+                                    <th class="px-6 py-4 font-semibold">ISBN</th>
+                                    <th class="px-6 py-4 font-semibold">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-sm">
+                                <tr th:each="book : ${books}" class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4 font-medium text-gray-800" th:text="${book.title}">Book Title
+                                    </td>
+                                    <td class="px-6 py-4 text-gray-600" th:text="${book.author}">Author Name</td>
+                                    <td class="px-6 py-4 text-gray-500 font-mono" th:text="${book.isbn}">123456</td>
+                                    <td class="px-6 py-4">
+                                        <span th:if="${book.remainingQuantity > 0}"
+                                            class="inline-flex items-center gap-1.5 text-emerald-700 font-bold bg-emerald-50 px-3 py-1.5 rounded-full text-xs border border-emerald-100">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Available
+                                        </span>
+                                        <span th:if="${book.remainingQuantity <= 0}"
+                                            class="inline-flex items-center gap-1.5 text-red-700 font-bold bg-red-50 px-3 py-1.5 rounded-full text-xs border border-red-100">
+                                            <i class="fa fa-clock-o"></i> Not available
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Dashboard Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 

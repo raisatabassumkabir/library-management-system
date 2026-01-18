@@ -10,12 +10,13 @@ import bd.edu.seu.library_management_system.service.DefaulterService;
 import bd.edu.seu.library_management_system.service.IssuedBookService;
 import bd.edu.seu.library_management_system.service.RegistrationService;
 import bd.edu.seu.library_management_system.service.StudentService;
+import bd.edu.seu.library_management_system.service.ManageBookService;
+import bd.edu.seu.library_management_system.model.ManageBook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,31 +24,33 @@ import java.util.Optional;
 public class StudentController {
     private final StudentRepository studentRepository;
     private final RegistrationRepository registrationRepository;
-    private final RegistrationService registrationService;
     // StudentService logic moved to secure login flow
     private final IssuedBookService issuedBookService;
     private final DefaulterRepository defaulterRepository;
     private final DefaulterService defaulterService;
+    private final ManageBookService manageBookService;
 
     public StudentController(StudentRepository studentRepository, RegistrationRepository registrationRepository,
-            RegistrationService registrationService, StudentService studentService,
+            StudentService studentService,
             IssuedBookService issuedBookService,
             DefaulterRepository defaulterRepository,
-            DefaulterService defaulterService) {
+            DefaulterService defaulterService,
+            ManageBookService manageBookService) {
         this.studentRepository = studentRepository;
         this.registrationRepository = registrationRepository;
-        this.registrationService = registrationService;
         // this.studentService = studentService; // Kept via dependency injection but
         // field is unused - to be safe removing usage
         this.issuedBookService = issuedBookService;
         this.defaulterRepository = defaulterRepository;
         this.defaulterService = defaulterService;
+        this.manageBookService = manageBookService;
     }
 
     // Manual login removed in favor of Spring Security
 
     @GetMapping("/studentDashboard")
-    public String studentDashboardPage(java.security.Principal principal, Model model) {
+    public String studentDashboardPage(@RequestParam(name = "query", required = false) String query,
+            java.security.Principal principal, Model model) {
         String email = principal.getName();
         email = email.trim(); // Ensure no leading/trailing spaces
         Optional<Student> studentOptional = studentRepository.findByEmail(email);
@@ -87,6 +90,13 @@ public class StudentController {
         model.addAttribute("defaulters", defaulters);
         model.addAttribute("email", email);
 
+        if (query != null && !query.trim().isEmpty()) {
+            List<ManageBook> books = manageBookService.searchBooks(query);
+            model.addAttribute("books", books);
+            model.addAttribute("query", query);
+        }
+
         return "studentDashboard";
     }
+
 }
