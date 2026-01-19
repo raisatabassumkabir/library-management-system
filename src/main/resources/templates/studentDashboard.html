@@ -78,7 +78,10 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100 text-sm">
                                 <tr th:each="book : ${books}" class="hover:bg-gray-50 transition-colors">
-                                    <td class="px-6 py-4 font-medium text-gray-800" th:text="${book.title}">Book Title
+                                    <td class="px-6 py-4 font-medium text-gray-800">
+                                        <a th:href="@{'/book/' + ${book.isbn}}"
+                                            class="hover:text-primary transition-colors hover:underline"
+                                            th:text="${book.title}">Book Title</a>
                                     </td>
                                     <td class="px-6 py-4 text-gray-600" th:text="${book.author}">Author Name</td>
                                     <td class="px-6 py-4 text-gray-500 font-mono" th:text="${book.isbn}">123456</td>
@@ -119,11 +122,16 @@
                                     <th class="px-4 py-3">Issue Date</th>
                                     <th class="px-4 py-3">Return Date</th>
                                     <th class="px-4 py-3 text-right">Fine</th>
+                                    <th class="px-4 py-3 text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 <tr th:each="book : ${borrowedBooks}" class="hover:bg-gray-50">
-                                    <td class="px-4 py-3 font-medium text-gray-800" th:text="${book.title}">Title</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">
+                                        <a th:href="@{'/book/' + ${book.isbn}}"
+                                            class="hover:text-primary transition-colors hover:underline"
+                                            th:text="${book.title}">Title</a>
+                                    </td>
                                     <td class="px-4 py-3 text-gray-500" th:text="${book.isbn}">ISBN</td>
                                     <td class="px-4 py-3 text-gray-500" th:text="${book.issueDate}">2023-01-01</td>
                                     <td class="px-4 py-3 text-gray-500" th:text="${book.returnDate}">2023-01-08</td>
@@ -133,9 +141,15 @@
                                         <span th:if="${book.fine == 0}" class="text-green-500 font-medium">No
                                             Fine</span>
                                     </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <a th:href="@{'/book/' + ${book.isbn}}"
+                                            class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded text-xs font-bold transition-colors">
+                                            <i class="fa fa-star"></i> Review
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr th:if="${#lists.isEmpty(borrowedBooks)}">
-                                    <td colspan="5" class="px-4 py-8 text-center text-gray-400 italic">No books
+                                    <td colspan="6" class="px-4 py-8 text-center text-gray-400 italic">No books
                                         currently borrowed.</td>
                                 </tr>
                             </tbody>
