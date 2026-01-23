@@ -1,11 +1,15 @@
 # Library Management System
 
-A comprehensive web-based application designed to streamline library operations for universities and educational institutions. This system manages the entire lifecycle of library resources, from book acquisition to member management and circulation.
+A comprehensive web-based application designed to streamline library operations for universities and educational institutions. This system manages the entire lifecycle of library resources, from book acquisition to member management and circulation, featuring a modern, glassmorphism-inspired UI.
 
 ## 🚀 Key Features
 
+### 🔐 Unified Login System
+- **Single Entry Point**: Unified login interface for Admins, Students, and Teachers.
+- **Role-Based Redirection**: Automatically directs users to their specific dashboard based on their role.
+
 ### 👨‍💼 Admin Panel
-- **Dashboard**: Real-time overview of total books, issued books, and active members.
+- **Interactive Dashboard**: Real-time overview of total books, issued books, and active members with dynamic charts.
 - **Inventory Management**: Add, update, and delete books with tracking for total and remaining quantities.
 - **Live Search**: "YouTube-like" instant search for books and defaulters without page reloads.
 - **Member Directory**: Manage student and teacher accounts with visual distinction (Blue for Students, Purple for Teachers).
@@ -14,7 +18,8 @@ A comprehensive web-based application designed to streamline library operations 
 
 ### 👨‍🎓 User Portals (Student & Teacher)
 - **Personal Dashboard**: View borrowed books, due dates, and fine status.
-- **Book Search**: Browse the library catalog instanly.
+- **Book Search**: Browse the library catalog instantly.
+- **Book Reviews & Ratings**: Rate and review books you've borrowed.
 - **Profile Management**: Update personal details and contact information.
 
 ### 🌐 Public Services
@@ -24,7 +29,7 @@ A comprehensive web-based application designed to streamline library operations 
 
 ## 🛠️ Technology Stack
 
-- **Backend**: Java, Spring Boot 3.4
+- **Backend**: Java 22, Spring Boot 3.4.4
 - **Security**: Spring Security (Role-based access control)
 - **Database**: MySQL, Spring Data JPA
 - **Frontend**: Thymeleaf, HTML5, Tailwind CSS
@@ -54,9 +59,9 @@ A comprehensive web-based application designed to streamline library operations 
 4.  **Access the App**
     Open your browser and navigate to: `http://localhost:8080`
 
-## 🔐 Default Admin Access
-*(Replace with actual default credentials if applicable, or instructions to create an admin)*
-- **Login URL**: `/admin`
+## 🔐 Default Access
+- **Login URL**: `/` or `/login`
+- **Credentials**: Use the registration page to create a new account, or seed the database with an admin user.
 
 ## 📝 License
 This project is open-source and available for educational purposes.
