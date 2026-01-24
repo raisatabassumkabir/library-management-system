@@ -11,11 +11,17 @@ public class RegistrationService {
 
     private final RegistrationRepository registrationRepository;
     private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+    private final bd.edu.seu.library_management_system.repository.StudentRepository studentRepository;
+    private final bd.edu.seu.library_management_system.repository.TeacherRepository teacherRepository;
 
     public RegistrationService(RegistrationRepository registrationRepository,
-            org.springframework.security.crypto.password.PasswordEncoder passwordEncoder) {
+            org.springframework.security.crypto.password.PasswordEncoder passwordEncoder,
+            bd.edu.seu.library_management_system.repository.StudentRepository studentRepository,
+            bd.edu.seu.library_management_system.repository.TeacherRepository teacherRepository) {
         this.registrationRepository = registrationRepository;
         this.passwordEncoder = passwordEncoder;
+        this.studentRepository = studentRepository;
+        this.teacherRepository = teacherRepository;
     }
 
     public void saveRegistration(Registration registration) {
@@ -43,11 +49,17 @@ public class RegistrationService {
             if (!localPart.matches("\\d{13}")) {
                 throw new IllegalArgumentException("Student email is incorrect");
             }
+            bd.edu.seu.library_management_system.model.Student student = new bd.edu.seu.library_management_system.model.Student(
+                    email, name, registration.getPassword());
+            studentRepository.save(student);
         } else if ("teacher".equalsIgnoreCase(userType)) {
             // 3. Teacher Check: Must contain a dot (.)
             if (!localPart.contains(".")) {
                 throw new IllegalArgumentException("Teacher email is incorrect");
             }
+            bd.edu.seu.library_management_system.model.Teacher teacher = new bd.edu.seu.library_management_system.model.Teacher(
+                    email, name, registration.getPassword());
+            teacherRepository.save(teacher);
         }
 
         // Encode password before saving
