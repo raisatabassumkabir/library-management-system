@@ -28,7 +28,7 @@
                 <span th:text="${error}"></span>
             </div>
 
-            <form action="/admin/add-member/save" method="post" th:object="${registration}"
+            <form th:action="@{/admin/add-member/save}" method="post" th:object="${registration}"
                 class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Name -->
                 <div class="md:col-span-2">
