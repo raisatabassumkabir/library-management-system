@@ -1,7 +1,12 @@
 package bd.edu.seu.library_management_system.service;
 
 import bd.edu.seu.library_management_system.model.Registration;
+import bd.edu.seu.library_management_system.model.Student;
+import bd.edu.seu.library_management_system.model.Teacher;
 import bd.edu.seu.library_management_system.repository.RegistrationRepository;
+import bd.edu.seu.library_management_system.repository.StudentRepository;
+import bd.edu.seu.library_management_system.repository.TeacherRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,14 +15,14 @@ import java.util.List;
 public class RegistrationService {
 
     private final RegistrationRepository registrationRepository;
-    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
-    private final bd.edu.seu.library_management_system.repository.StudentRepository studentRepository;
-    private final bd.edu.seu.library_management_system.repository.TeacherRepository teacherRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final StudentRepository studentRepository;
+    private final TeacherRepository teacherRepository;
 
     public RegistrationService(RegistrationRepository registrationRepository,
-            org.springframework.security.crypto.password.PasswordEncoder passwordEncoder,
-            bd.edu.seu.library_management_system.repository.StudentRepository studentRepository,
-            bd.edu.seu.library_management_system.repository.TeacherRepository teacherRepository) {
+            PasswordEncoder passwordEncoder,
+            StudentRepository studentRepository,
+            TeacherRepository teacherRepository) {
         this.registrationRepository = registrationRepository;
         this.passwordEncoder = passwordEncoder;
         this.studentRepository = studentRepository;
@@ -49,7 +54,7 @@ public class RegistrationService {
             if (!localPart.matches("\\d{13}")) {
                 throw new IllegalArgumentException("Student email is incorrect");
             }
-            bd.edu.seu.library_management_system.model.Student student = new bd.edu.seu.library_management_system.model.Student(
+            Student student = new Student(
                     email, name, registration.getPassword());
             studentRepository.save(student);
         } else if ("teacher".equalsIgnoreCase(userType)) {
@@ -57,7 +62,7 @@ public class RegistrationService {
             if (!localPart.contains(".")) {
                 throw new IllegalArgumentException("Teacher email is incorrect");
             }
-            bd.edu.seu.library_management_system.model.Teacher teacher = new bd.edu.seu.library_management_system.model.Teacher(
+            Teacher teacher = new Teacher(
                     email, name, registration.getPassword());
             teacherRepository.save(teacher);
         }
@@ -69,5 +74,9 @@ public class RegistrationService {
 
     public List<Registration> getAllRegistrations() {
         return registrationRepository.findAll();
+    }
+
+    public List<Registration> searchRegistrations(String query) {
+        return registrationRepository.findByEmailContainingIgnoreCase(query);
     }
 }

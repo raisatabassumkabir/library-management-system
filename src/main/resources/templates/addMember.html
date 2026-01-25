@@ -92,9 +92,13 @@
                             class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                             <i class="fa fa-lock"></i>
                         </div>
-                        <input type="text" th:field="*{password}"
-                            class="w-full h-12 pl-10 pr-4 bg-slate-50 border border-slate-200 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
+                        <input type="password" id="adminPassword" th:field="*{password}"
+                            class="w-full h-12 pl-10 pr-10 bg-slate-50 border border-slate-200 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
                             placeholder="Set a password" required />
+                        <span onclick="toggleAdminPassword()"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-primary transition">
+                            <i class="fa fa-eye" id="adminToggleIcon"></i>
+                        </span>
                     </div>
                 </div>
 
@@ -109,6 +113,22 @@
             </form>
         </div>
     </div>
+    <script>
+        function toggleAdminPassword() {
+            const passwordInput = document.getElementById("adminPassword");
+            const toggleIcon = document.getElementById("adminToggleIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
 </body>
 
 </html>
