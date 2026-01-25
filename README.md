@@ -4,14 +4,11 @@ A comprehensive web-based application designed to streamline library operations 
 
 ## 🎥 Project Demo
 
-<!--
-    Instructions for User:
-    1. Go to this file on GitHub.
-    2. Click the 'Edit' (pencil) icon.
-    3. Drag and drop your video file right here.
-    4. GitHub will upload it and generate a link.
-    5. Commit the changes.
--->
+
+https://github.com/user-attachments/assets/c0fbde65-476a-470b-97bb-8e964bd54b6c
+
+
+
 
 ## 🚀 Key Features
 
